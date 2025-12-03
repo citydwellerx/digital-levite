@@ -1,126 +1,89 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Digital Levite</title>
-    <meta name="description" content="A minimalist, typewriter-style personal blog focusing on text, code, and theology.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<style>
-    /* THEME SELECTION -------------------------------- */
     
-    /* OPTION A: MINIMALIST TYPEWRITER (Active) */
-    :root {
-        --bg-color: #fdfbf7;      
-        --text-color: #111111;    
-        --accent-color: #666666;
-        --link-hover: #000000;
-        --link-hover-text: #ffffff;
-        --font-family: 'Courier Prime', 'Courier New', monospace;
-    }
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        /* =========================================
+           THEME CONTROL PANEL
+           ========================================= */
+        :root {
+            /* OPTION A: TYPEWRITER THEME (Active) */
+            --bg-color: #fdfbf7;      
+            --text-color: #111111;    
+            --accent-color: #666666;  
+            --font-family: 'Courier Prime', 'Courier New', monospace;
+            
+            /* OPTION B: GREEN TERMINAL (Disabled - Move comment markers to activate)
+            --bg-color: #0a0a0a;      
+            --text-color: #00ff41;    
+            --accent-color: #008F11;  
+            */
+        }
 
-    /* OPTION B: GREEN TERMINAL (Uncomment to activate) */
-    /*
-    :root {
-        --bg-color: #0d1117;      
-        --text-color: #00ff41;    
-        --accent-color: #008F11;
-        --link-hover: #00ff41;
-        --link-hover-text: #000000;
-        --font-family: 'Courier New', monospace;
-    }
-    */
-    
-    /* ------------------------------------------------ */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
 
-    body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        font-family: var(--font-family);
-        line-height: 1.6;
-        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-    }
-    
-    /* ... rest of your CSS ... */
-</style>
+        /* Customizing the Prose (Article Text) to match our theme */
+        .prose {
+            color: var(--text-color) !important;
+            max-width: none; /* Let text fill the container */
+        }
+        .prose h1, .prose h2, .prose h3, .prose strong {
+            color: var(--text-color) !important;
+        }
+        .prose a {
+            color: var(--text-color) !important;
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body class="min-h-screen p-8 max-w-3xl mx-auto flex flex-col">
+<body class="min-h-screen p-8 max-w-3xl mx-auto">
 
-    <header class="mb-12 border-b-2 border-gray-800 pb-6">
-        <h1 class="text-4xl font-bold mb-2 tracking-tight">The Digital Levite</h1>
-        <div class="flex justify-between text-sm uppercase tracking-widest text-gray-600">
-            <span>Est. 2025 // Vol. 1</span>
+    <header class="mb-12 border-b border-gray-300 pb-4">
+        <h1 class="text-3xl font-bold mb-2">The Digital Levite</h1>
+        <div class="flex justify-between text-sm opacity-70">
+            <span>> EST. 2025 | SIGNAL_ACTIVE</span>
             <span class="blink">_</span>
         </div>
-        <nav class="mt-6 space-x-6 text-sm">
-            <a href="#" onclick="renderList(); return false;" class="hover:bg-black hover:text-white px-1 transition-colors">[Index]</a>
-            <a href="mailto:contact@digitallevite.com" class="hover:bg-black hover:text-white px-1 transition-colors">[Contact]</a>
+        <nav class="mt-4 space-x-4 text-sm underline">
+            <a href="#" onclick="renderList(); return false;">Index</a>
+            <a href="mailto:your-email@example.com">Contact</a>
         </nav>
     </header>
 
-    <main id="app" class="flex-grow">
-        <!-- Content will be injected here -->
-        <div class="text-center py-10 opacity-50">
-            Loading paper feed...
-        </div>
-    </main>
+    <main id="app">
+        </main>
 
-    <footer class="mt-20 text-center text-xs text-gray-400 border-t border-gray-200 pt-8">
-        <p>NO COMMENTS. NO TRACKERS. JUST TEXT.</p>
-        <p class="mt-2">&copy; 2025 The Digital Levite</p>
+    <footer class="mt-20 text-center text-xs opacity-50">
+        <p>&gt; NO COMMENTS ALLOWED. SEND BRICKS VIA EMAIL.</p>
     </footer>
 
     <script>
-        // BACKUP DATA: Used if posts.json cannot be fetched (e.g., local file system)
-        const FALLBACK_POSTS = [
-            {
-                "id": "1",
-                "title": "Hello_World.txt",
-                "date": "2025-12-03",
-                "excerpt": "Initializing the system. Why I chose a static text aesthetic for 2025.",
-                "content": "<p>Welcome to <strong>The Digital Levite</strong>.</p><p>In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p><p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p><p>Status: <span class=\"font-bold border-b border-black\">ONLINE</span>.</p>",
-                "tags": ["meta", "intro", "minimalism"]
-            },
-            {
-                "id": "2",
-                "title": "The Sacred and The Silicon",
-                "date": "2025-12-03",
-                "excerpt": "Reflections on maintaining spiritual discipline in a hyper-connected digital age.",
-                "content": "<p>The Levites of old were set apart for service, maintaining the sacred spaces. Today, our \"sacred spaces\" are often digital. Our temples are servers; our rituals are routines.</p><p>How do we maintain purity of thought when the algorithm is designed to pollute it with outrage? The answer isn't total disconnection—it's intentionality.</p><ul><li>Curate your inputs relentlessly.</li><li>Practice digital sabbaths.</li><li>Remember that you are the user, not the product.</li></ul><p>We must learn to walk through the digital fire without smelling of smoke.</p>",
-                "tags": ["philosophy", "theology", "digital-health"]
-            },
-            {
-                "id": "3",
-                "title": "Stack Overflow Architecture",
-                "date": "2025-12-03",
-                "excerpt": "Why copying and pasting code isn't engineering, but understanding it is.",
-                "content": "<p>We've all done it. <code class=\"bg-gray-200 px-1 rounded\">Ctrl+C</code>, <code class=\"bg-gray-200 px-1 rounded\">Ctrl+V</code>. But the difference between a \"coder\" and an \"engineer\" is what happens in the milliseconds between those keystrokes.</p><p>If you can't explain <em>why</em> the solution works, you haven't solved the problem; you've just deferred the bug to a later date.</p><blockquote>\"Understanding is the compression algorithm of knowledge.\"</blockquote><p>Read the documentation. Read the source. Be the engineer.</p>",
-                "tags": ["coding", "career", "advice"]
-            },
-            {
-                "id": "4",
-                "title": "End of Line",
-                "date": "2025-12-03",
-                "excerpt": "A short poem about deprecated functions and lost data.",
-                "content": "<p class=\"whitespace-pre-line\">The cursor blinks, a steady heart,\nIn voids where processes depart.\nA memory leaked, a pointer lost,\nWe optimize, but at what cost?</p><p class=\"whitespace-pre-line\">The function returns, the stack unwinds,\nLeaving trace logs in our minds.\nShutting down...</p>",
-                "tags": ["poetry", "creative"]
-            }
-        ];
-
-        // 1. Fetch Posts (with Fallback)
+        // 1. Fetch the Bricks
         async function loadPosts() {
             try {
-                const response = await fetch('posts.json');
+                // Add a timestamp to prevent caching old versions
+                const response = await fetch(`posts.json?t=${new Date().getTime()}`);
                 if (!response.ok) throw new Error("Signal Lost");
                 const posts = await response.json();
                 return posts;
             } catch (e) {
-                console.warn("Could not load external posts.json. Using internal backup.", e);
-                return FALLBACK_POSTS;
+                document.getElementById('app').innerHTML = `<p>> ERROR: COULD NOT LOAD BRICKS. CHECK POSTS.JSON</p>`;
+                return [];
             }
         }
 
@@ -129,60 +92,63 @@
             const posts = await loadPosts();
             const app = document.getElementById('app');
             
-            let html = `<div class="space-y-12">`;
+            // Sort posts by date (Newest First) if they aren't already
+            posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            let html = `<div class="space-y-8">`;
             posts.forEach(post => {
-                // IMPORTANT: Using post.id here because posts.json uses 'id', not 'slug'
                 html += `
-                    <article class="group cursor-pointer" onclick="renderPost('${post.id}')">
-                        <div class="flex items-baseline justify-between mb-2">
-                            <h2 class="text-2xl font-bold group-hover:underline decoration-2 underline-offset-4">${post.title}</h2>
-                            <span class="text-xs text-gray-500 font-mono">${post.date}</span>
-                        </div>
-                        <p class="text-gray-700 leading-relaxed mb-3">${post.excerpt}</p>
-                        <div class="text-xs text-gray-400 font-mono uppercase tracking-wider">
-                            ${post.tags.map(tag => `#${tag}`).join(' ')}
-                        </div>
+                    <article class="cursor-pointer hover:opacity-70 transition group" onclick="renderPost('${post.slug}')">
+                        <p class="text-xs mb-1 opacity-60 font-mono">> ${post.date}</p>
+                        <h2 class="text-xl font-bold underline decoration-1 underline-offset-4 group-hover:decoration-2">${post.title}</h2>
                     </article>
                 `;
             });
             html += `</div>`;
             app.innerHTML = html;
-            window.scrollTo(0,0);
+            
+            // Update URL without reloading
+            history.pushState(null, '', '#');
         }
 
-        // 3. Render Detail
-        async function renderPost(id) {
+        // 3. Render Single Post (Now with Markdown!)
+        async function renderPost(slug) {
             const posts = await loadPosts();
-            // IMPORTANT: Using 'id' for lookup to match the data structure
-            const post = posts.find(p => p.id === id); 
+            const post = posts.find(p => p.slug === slug);
             const app = document.getElementById('app');
 
             if (post) {
                 app.innerHTML = `
-                    <div class="animate-fade-in max-w-2xl mx-auto">
-                        <button onclick="renderList()" class="mb-8 text-sm hover:bg-black hover:text-white px-2 py-1 transition-colors inline-block font-mono">&lt;&lt; BACK_TO_INDEX</button>
-                        
-                        <header class="mb-8 border-b border-gray-200 pb-8">
-                            <h1 class="text-3xl font-bold mb-4">${post.title}</h1>
-                            <div class="flex justify-between items-center text-sm text-gray-500 font-mono">
-                                <time>${post.date}</time>
-                                <span>ID: ${post.id}</span>
+                    <div class="animate-fade-in">
+                        <button onclick="renderList()" class="mb-6 text-sm hover:underline opacity-70"><< RETURN_TO_INDEX</button>
+                        <article>
+                            <h1 class="text-3xl font-bold mb-2">${post.title}</h1>
+                            <time class="text-xs opacity-60 block mb-8 font-mono">> LOGGED: ${post.date}</time>
+                            
+                            <div class="prose prose-stone leading-relaxed">
+                                ${marked.parse(post.content)}
                             </div>
-                        </header>
-
-                        <article class="prose text-lg text-gray-800 leading-relaxed font-serif">
-                            ${post.content}
                         </article>
                     </div>
                 `;
-                window.scrollTo(0,0);
-            } else {
-                app.innerHTML = `<p class="text-red-600 font-mono">ERROR 404: FILE NOT FOUND.</p><button onclick="renderList()" class="mt-4 underline">Return Home</button>`;
+                // Update URL to make it shareable (e.g. #my-post)
+                history.pushState(null, '', `#${slug}`);
             }
         }
 
-        // Initialize
-        renderList();
+        // 4. Handle Browser Back/Forward Buttons
+        window.onpopstate = () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) renderPost(hash);
+            else renderList();
+        };
+
+        // 5. Start System
+        // Check if user loaded a specific post via URL hash
+        const initialHash = window.location.hash.replace('#', '');
+        if (initialHash) renderPost(initialHash);
+        else renderList();
+
     </script>
 </body>
 </html>
