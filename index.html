@@ -32,6 +32,11 @@
         
         .blink { animation: blinker 1s linear infinite; }
         @keyframes blinker { 50% { opacity: 0; } }
+
+        /* Typography tweaks for readability */
+        article p { margin-bottom: 1.25rem; line-height: 1.6; }
+        article ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+        article blockquote { border-left: 4px solid #ccc; padding-left: 1rem; margin: 1.5rem 0; font-style: italic; color: #555; }
     </style>
 </head>
 <body class="min-h-screen p-8 max-w-3xl mx-auto">
@@ -49,23 +54,46 @@
     </header>
 
     <main id="app">
-        </main>
+        <p class="animate-pulse">> INITIALIZING SYSTEM...</p>
+    </main>
 
     <footer class="mt-20 text-center text-xs opacity-50">
         <p>&gt; NO COMMENTS ALLOWED. SEND BRICKS VIA EMAIL.</p>
     </footer>
 
     <script>
+        // 0. Fallback Data (In case posts.json is deleted or fetch fails)
+        const FALLBACK_POSTS = [
+          {
+            "id": "1",
+            "title": "Hello_World.txt",
+            "date": "2025-12-03",
+            "excerpt": "Initializing the system. Why I chose a static text aesthetic for 2025.",
+            "content": "<p>Welcome to <strong>The Digital Levite</strong>.</p><p>In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p><p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p><p>Status: <span class=\"font-bold border-b border-ink\">ONLINE</span>.</p>",
+            "tags": ["meta", "intro", "minimalism"]
+          },
+          {
+            "id": "2",
+            "title": "The Sacred and The Silicon",
+            "date": "2025-12-03",
+            "excerpt": "Reflections on maintaining spiritual discipline in a hyper-connected digital age.",
+            "content": "<p>The Levites of old were set apart for service, maintaining the sacred spaces. Today, our \"sacred spaces\" are often digital. Our temples are servers; our rituals are routines.</p><p>How do we maintain purity of thought when the algorithm is designed to pollute it with outrage? The answer isn't total disconnection—it's intentionality.</p><ul><li>Curate your inputs relentlessly.</li><li>Practice digital sabbaths.</li><li>Remember that you are the user, not the product.</li></ul><p>We must learn to walk through the digital fire without smelling of smoke.</p>",
+            "tags": ["philosophy", "theology", "digital-health"]
+          }
+        ];
+
         // 1. Fetch the Bricks from your JSON file
         async function loadPosts() {
             try {
                 const response = await fetch('posts.json');
-                if (!response.ok) throw new Error("Signal Lost");
+                if (!response.ok) throw new Error("File missing");
                 const posts = await response.json();
+                console.log("Loaded from posts.json");
                 return posts;
             } catch (e) {
-                document.getElementById('app').innerHTML = `<p>> ERROR: COULD NOT LOAD BRICKS. CHECK POSTS.JSON</p>`;
-                return [];
+                console.warn("Could not load posts.json, using fallback data.", e);
+                // Return fallback data instead of empty array so the app still works
+                return FALLBACK_POSTS;
             }
         }
 
@@ -74,12 +102,19 @@
             const posts = await loadPosts();
             const app = document.getElementById('app');
             
+            if (posts.length === 0) {
+                app.innerHTML = `<p>> ERROR: NO DATA FOUND.</p>`;
+                return;
+            }
+
             let html = `<div class="space-y-8">`;
             posts.forEach(post => {
+                // Using post.id instead of post.slug to match data structure
                 html += `
-                    <article class="cursor-pointer hover:opacity-70 transition" onclick="renderPost('${post.slug}')">
-                        <p class="text-xs mb-1 opacity-60">> ${post.date}</p>
-                        <h2 class="text-xl font-bold underline">${post.title}</h2>
+                    <article class="cursor-pointer hover:opacity-70 transition group" onclick="renderPost('${post.id}')">
+                        <p class="text-xs mb-1 opacity-60 font-mono">> ${post.date}</p>
+                        <h2 class="text-xl font-bold underline decoration-gray-400 group-hover:decoration-gray-800">${post.title}</h2>
+                        <p class="text-sm mt-2 opacity-80">${post.excerpt}</p>
                     </article>
                 `;
             });
@@ -88,22 +123,28 @@
         }
 
         // 3. Render a Single Post
-        async function renderPost(slug) {
+        async function renderPost(id) {
             const posts = await loadPosts();
-            const post = posts.find(p => p.slug === slug);
+            // Using id instead of slug
+            const post = posts.find(p => p.id === id);
             const app = document.getElementById('app');
 
             if (post) {
+                // Scroll to top when opening a post
+                window.scrollTo(0, 0);
+                
                 app.innerHTML = `
                     <div class="animate-fade-in">
-                        <button onclick="renderList()" class="mb-6 text-sm hover:underline"><< RETURN_TO_INDEX</button>
-                        <article class="prose prose-stone">
-                            <h1 class="text-2xl font-bold mb-2">${post.title}</h1>
-                            <time class="text-xs opacity-60 block mb-8">> LOGGED: ${post.date}</time>
-                            <div class="whitespace-pre-wrap">${post.content}</div>
+                        <button onclick="renderList()" class="mb-8 text-sm hover:bg-gray-200 px-2 py-1 -ml-2 rounded transition"><< RETURN_TO_INDEX</button>
+                        <article class="prose prose-stone max-w-none">
+                            <h1 class="text-3xl font-bold mb-2 font-mono">${post.title}</h1>
+                            <time class="text-xs opacity-60 block mb-8 font-mono border-b pb-4">> LOGGED: ${post.date} // ID: ${post.id}</time>
+                            <div class="whitespace-pre-wrap font-sans text-base leading-relaxed">${post.content}</div>
                         </article>
                     </div>
                 `;
+            } else {
+                 app.innerHTML = `<p>> ERROR: ENTRY NOT FOUND.</p><button onclick="renderList()" class="mt-4 underline"><< BACK</button>`;
             }
         }
 
