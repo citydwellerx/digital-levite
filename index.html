@@ -63,54 +63,42 @@
 
     <!-- Global Styles -->
     <style>
-      body {
-        background-color: #fdfbf7;
-        color: #111111;
-        margin: 0;
-        line-height: 1.6;
-      }
-      
-      /* Smooth scrolling */
-      html {
-        scroll-behavior: smooth;
-      }
+    /* =========================================
+       THEME CONTROL PANEL
+       (Move the /* comments */ to switch vibes)
+       ========================================= */
 
-      /* Custom selection color */
-      ::selection {
-        background: #111111;
-        color: #fdfbf7;
-      }
+    /* --- OPTION A: MINIMALIST TYPEWRITER (Active) --- */
+    :root {
+        --bg-color: #fdfbf7;      /* Off-White Paper */
+        --text-color: #111111;    /* Ink Black */
+        --accent-color: #666666;  /* Grey Accents */
+        --font-family: 'Courier Prime', 'Courier New', monospace;
+    }
 
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #fdfbf7;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #e6e4df;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #ccc;
-      }
-      
-      /* Utility for hiding elements */
-      .hidden {
-        display: none !important;
-      }
-      
-      /* Loading animation */
-      @keyframes blink {
-        0% { opacity: 0; }
-        50% { opacity: 1; }
-        100% { opacity: 0; }
-      }
-      .cursor-blink {
-        animation: blink 1s infinite;
-      }
-    </style>
+    /* --- OPTION B: GREEN TERMINAL (Disabled) --- 
+    :root {
+        --bg-color: #0a0a0a;      /* Deep Space Black */
+        --text-color: #00ff41;    /* Retro Green */
+        --accent-color: #008F11;  /* Darker Green */
+        --font-family: 'Courier New', monospace;
+    }
+    -------------------------------------------------- */
+
+    /* GLOBAL STYLES (Do not touch) */
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: var(--font-family);
+        transition: background-color 0.3s, color 0.3s; /* Smooth fade when switching */
+    }
+
+    /* Force Tailwind elements to obey our variables */
+    .border-terminal-green { border-color: var(--accent-color) !important; }
+    .text-terminal-green { color: var(--text-color) !important; }
+    a { color: var(--text-color); text-decoration: underline; }
+    a:hover { color: var(--accent-color); }
+</style>
 </head>
 <body class="font-mono antialiased bg-paper text-ink">
 
