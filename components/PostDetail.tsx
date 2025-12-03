@@ -40,7 +40,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ post, onBack }) => {
             {post.title}
           </h1>
           <time className="text-sm opacity-70 block">
-            > DATE_CREATED: {post.date}
+            &gt; DATE_CREATED: {post.date}
           </time>
         </header>
 
@@ -59,7 +59,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ post, onBack }) => {
           href={`mailto:contact@digitallevite.com?subject=Re: ${post.title}`}
           className="text-sm border border-terminal-green px-4 py-2 hover:bg-terminal-green hover:text-black transition-all"
         >
-          > REPLY_VIA_EMAIL_PROTOCOL
+          &gt; REPLY_VIA_EMAIL_PROTOCOL
         </a>
       </div>
     </div>
