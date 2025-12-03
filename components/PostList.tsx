@@ -10,8 +10,8 @@ const PostList: React.FC<PostListProps> = ({ posts, onSelectPost }) => {
   return (
     <div className="space-y-8">
       <div className="text-sm mb-6 border-l-2 border-terminal-green pl-3 py-1 bg-terminal-dim bg-opacity-20">
-        <p>> LISTING FILES IN DIRECTORY...</p>
-        <p>> {posts.length} FILES FOUND.</p>
+        <p>&gt; LISTING FILES IN DIRECTORY...</p>
+        <p>&gt; {posts.length} FILES FOUND.</p>
       </div>
 
       <ul className="space-y-6">
