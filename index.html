@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Digital Levite - A minimalist, typewriter-style personal blog.">
     <title>The Digital Levite</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     
+    <!-- Marked.js for Markdown parsing (optional, but good for future) -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <style>
@@ -19,11 +22,15 @@
             --text-color: #111111;    
             --accent-color: #666666;  
             --font-family: 'Courier Prime', 'Courier New', monospace;
+            --link-hover: #000000;
             
-            /* OPTION B: GREEN TERMINAL (Disabled - Move comment markers to activate)
-            --bg-color: #0a0a0a;      
+            /* OPTION B: GREEN TERMINAL (Uncomment to activate) */
+            /*
+            --bg-color: #0d1117;      
             --text-color: #00ff41;    
-            --accent-color: #008F11;  
+            --accent-color: #008F11;
+            --link-hover: #ffffff;
+            --font-family: 'Courier New', monospace;
             */
         }
 
@@ -31,123 +38,230 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-family);
+            line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
+        }
+
+        a {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: var(--accent-color);
+            transition: all 0.2s;
+        }
+
+        a:hover {
+            color: var(--link-hover);
+            text-decoration-thickness: 2px;
         }
         
         .blink { animation: blinker 1s linear infinite; }
         @keyframes blinker { 50% { opacity: 0; } }
 
-        /* Customizing the Prose (Article Text) to match our theme */
+        /* TYPOGRAPHY FIXES (For Spacing) */
         .prose {
-            color: var(--text-color) !important;
-            max-width: none; /* Let text fill the container */
+            max-width: none;
         }
-        .prose h1, .prose h2, .prose h3, .prose strong {
-            color: var(--text-color) !important;
+        /* Add breathing room between paragraphs */
+        .prose p {
+            margin-bottom: 1.5em;
         }
-        .prose a {
-            color: var(--text-color) !important;
-            text-decoration: underline;
+        .prose ul, .prose ol {
+            margin-bottom: 1.5em;
+            padding-left: 1.5em;
+        }
+        .prose li {
+            margin-bottom: 0.5em;
+        }
+        .prose blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1em;
+            margin-left: 0;
+            margin-bottom: 1.5em;
+            font-style: italic;
+            opacity: 0.8;
         }
     </style>
 </head>
-<body class="min-h-screen p-8 max-w-3xl mx-auto">
+<body class="min-h-screen p-6 md:p-12 max-w-3xl mx-auto flex flex-col">
 
-    <header class="mb-12 border-b border-gray-300 pb-4">
-        <h1 class="text-3xl font-bold mb-2">The Digital Levite</h1>
-        <div class="flex justify-between text-sm opacity-70">
+    <header class="mb-16 border-b border-gray-300 pb-6">
+        <h1 class="text-3xl md:text-4xl font-bold mb-3 tracking-tight">The Digital Levite</h1>
+        <div class="flex justify-between text-xs md:text-sm uppercase tracking-widest opacity-60 font-mono">
             <span>> EST. 2025 | SIGNAL_ACTIVE</span>
             <span class="blink">_</span>
         </div>
-        <nav class="mt-4 space-x-4 text-sm underline">
+        <nav class="mt-6 space-x-6 text-sm">
             <a href="#" onclick="renderList(); return false;">Index</a>
             <a href="mailto:your-email@example.com">Contact</a>
         </nav>
     </header>
 
-    <main id="app">
-        </main>
+    <main id="app" class="flex-grow">
+        <!-- Content injects here -->
+        <div class="animate-pulse opacity-50">> Loading protocols...</div>
+    </main>
 
-    <footer class="mt-20 text-center text-xs opacity-50">
-        <p>&gt; NO COMMENTS ALLOWED. SEND BRICKS VIA EMAIL.</p>
+    <footer class="mt-20 pt-8 border-t border-gray-200 text-center text-[10px] md:text-xs opacity-40 uppercase tracking-widest font-mono">
+        <p>&gt; NO COMMENTS. NO TRACKERS. JUST TEXT.</p>
+        <p class="mt-2">© 2025 The Digital Levite</p>
     </footer>
 
     <script>
-        // 1. Fetch the Bricks
-        async function loadPosts() {
-            try {
-                // Add a timestamp to prevent caching old versions
-                const response = await fetch(`posts.json?t=${new Date().getTime()}`);
-                if (!response.ok) throw new Error("Signal Lost");
-                const posts = await response.json();
-                return posts;
-            } catch (e) {
-                document.getElementById('app').innerHTML = `<p>> ERROR: COULD NOT LOAD BRICKS. CHECK POSTS.JSON</p>`;
-                return [];
+        // =========================================
+        // DATA LAYER
+        // =========================================
+
+        // FALLBACK DATA: This loads if posts.json is missing or fetch fails.
+        const FALLBACK_POSTS = [
+            {
+                "id": "1",
+                "title": "Hello_World.txt",
+                "date": "2025-12-03",
+                "content": "<p>Welcome to <strong>The Digital Levite</strong>.</p><p>In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p><p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p><p>Status: <span class=\"font-bold border-b border-black\">ONLINE</span>.</p>"
+            },
+            {
+                "id": "2",
+                "title": "The Sacred and The Silicon",
+                "date": "2025-12-03",
+                "content": "<p>The Levites of old were set apart for service, maintaining the sacred spaces. Today, our \"sacred spaces\" are often digital. Our temples are servers; our rituals are routines.</p><p>How do we maintain purity of thought when the algorithm is designed to pollute it with outrage? The answer isn't total disconnection—it's intentionality.</p><ul class=\"list-disc\"><li class=\"marker:text-gray-500\">Curate your inputs relentlessly.</li><li class=\"marker:text-gray-500\">Practice digital sabbaths.</li><li class=\"marker:text-gray-500\">Remember that you are the user, not the product.</li></ul><p>We must learn to walk through the digital fire without smelling of smoke.</p>"
+            },
+            {
+                "id": "3",
+                "title": "Stack Overflow Architecture",
+                "date": "2025-12-03",
+                "content": "<p>We've all done it. <code class=\"bg-gray-200 px-1 rounded text-sm\">Ctrl+C</code>, <code class=\"bg-gray-200 px-1 rounded text-sm\">Ctrl+V</code>. But the difference between a \"coder\" and an \"engineer\" is what happens in the milliseconds between those keystrokes.</p><p>If you can't explain <em>why</em> the solution works, you haven't solved the problem; you've just deferred the bug to a later date.</p><blockquote>\"Understanding is the compression algorithm of knowledge.\"</blockquote><p>Read the documentation. Read the source. Be the engineer.</p>"
+            },
+            {
+                "id": "4",
+                "title": "End of Line",
+                "date": "2025-12-03",
+                "content": "<p class=\"whitespace-pre-line\">The cursor blinks, a steady heart,\nIn voids where processes depart.\nA memory leaked, a pointer lost,\nWe optimize, but at what cost?</p><p class=\"whitespace-pre-line\">The function returns, the stack unwinds,\nLeaving trace logs in our minds.\nShutting down...</p>"
             }
+        ];
+
+        let cachedPosts = null;
+
+        // 1. Fetch Posts (with fallback)
+        async function loadPosts() {
+            if (cachedPosts) return cachedPosts;
+
+            try {
+                // Try fetching external JSON file
+                const response = await fetch(`posts.json?t=${new Date().getTime()}`);
+                if (!response.ok) throw new Error("File not found");
+                cachedPosts = await response.json();
+                console.log("Loaded from posts.json");
+            } catch (e) {
+                console.warn("Could not load posts.json. Using internal fallback data.");
+                cachedPosts = FALLBACK_POSTS;
+            }
+            return cachedPosts;
         }
 
-        // 2. Render Index
+        // 2. Render Index List
         async function renderList() {
             const posts = await loadPosts();
             const app = document.getElementById('app');
             
-            // Sort posts by date (Newest First) if they aren't already
+            // Sort: Newest first
             posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            let html = `<div class="space-y-8">`;
+            let html = `<div class="space-y-10 animate-fade-in">`;
             posts.forEach(post => {
                 html += `
-                    <article class="cursor-pointer hover:opacity-70 transition group" onclick="renderPost('${post.slug}')">
-                        <p class="text-xs mb-1 opacity-60 font-mono">> ${post.date}</p>
-                        <h2 class="text-xl font-bold underline decoration-1 underline-offset-4 group-hover:decoration-2">${post.title}</h2>
+                    <article class="group">
+                        <div class="flex items-baseline space-x-4 mb-1 opacity-50 text-xs font-mono">
+                            <span>> ${post.date}</span>
+                            <span>ID: ${post.id}</span>
+                        </div>
+                        <h2 class="text-2xl font-bold cursor-pointer hover:underline decoration-2 underline-offset-4" 
+                            onclick="renderPost('${post.id}')">
+                            ${post.title}
+                        </h2>
                     </article>
                 `;
             });
             html += `</div>`;
             app.innerHTML = html;
             
-            // Update URL without reloading
-            history.pushState(null, '', '#');
+            // Update URL safely
+            try {
+                history.pushState(null, '', window.location.pathname + window.location.search);
+            } catch (e) {
+                console.warn("History API not supported in this environment (likely blob/preview). Ignoring URL update.");
+            }
+            window.scrollTo(0, 0);
         }
 
-        // 3. Render Single Post (Now with Markdown!)
-        async function renderPost(slug) {
+        // 3. Render Single Post
+        async function renderPost(id) {
             const posts = await loadPosts();
-            const post = posts.find(p => p.slug === slug);
+            // Important: Comparing as strings to avoid type errors
+            const post = posts.find(p => String(p.id) === String(id));
             const app = document.getElementById('app');
 
             if (post) {
+                // Use Marked if available, otherwise just inject HTML
+                const contentHtml = (typeof marked !== 'undefined') 
+                    ? marked.parse(post.content) 
+                    : post.content;
+
                 app.innerHTML = `
                     <div class="animate-fade-in">
-                        <button onclick="renderList()" class="mb-6 text-sm hover:underline opacity-70"><< RETURN_TO_INDEX</button>
+                        <button onclick="renderList()" class="mb-8 text-xs font-mono hover:bg-gray-200 px-2 py-1 rounded transition-colors">
+                            << BACK_TO_INDEX
+                        </button>
                         <article>
-                            <h1 class="text-3xl font-bold mb-2">${post.title}</h1>
-                            <time class="text-xs opacity-60 block mb-8 font-mono">> LOGGED: ${post.date}</time>
+                            <h1 class="text-3xl md:text-4xl font-bold mb-4">${post.title}</h1>
+                            <div class="flex justify-between items-center text-xs opacity-50 font-mono mb-12 border-b border-gray-200 pb-4">
+                                <time>${post.date}</time>
+                                <span>ID: ${post.id}</span>
+                            </div>
                             
-                            <div class="prose prose-stone leading-relaxed">
-                                ${marked.parse(post.content)}
+                            <!-- The 'prose' class here applies our CSS spacing fixes -->
+                            <div class="prose prose-stone text-lg leading-relaxed">
+                                ${contentHtml}
                             </div>
                         </article>
                     </div>
                 `;
-                // Update URL to make it shareable (e.g. #my-post)
-                history.pushState(null, '', `#${slug}`);
+                
+                // Update URL safely
+                try {
+                    history.pushState(null, '', `#${id}`);
+                } catch (e) {
+                    console.warn("History API not supported in this environment (likely blob/preview). Ignoring URL update.");
+                }
+                window.scrollTo(0, 0);
+            } else {
+                app.innerHTML = `<p class="text-red-600 font-mono">> ERROR 404: POST_ID_${id}_NOT_FOUND</p>`;
             }
         }
 
-        // 4. Handle Browser Back/Forward Buttons
+        // 4. Handle Browser Navigation (Back/Forward)
         window.onpopstate = () => {
-            const hash = window.location.hash.replace('#', '');
-            if (hash) renderPost(hash);
-            else renderList();
+            handleRoute();
         };
 
-        // 5. Start System
-        // Check if user loaded a specific post via URL hash
-        const initialHash = window.location.hash.replace('#', '');
-        if (initialHash) renderPost(initialHash);
-        else renderList();
+        function handleRoute() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                renderPost(hash);
+            } else {
+                renderList();
+            }
+        }
+
+        // 5. Initialize
+        // Add simple fade animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+            .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        `;
+        document.head.appendChild(style);
+
+        handleRoute();
 
     </script>
 </body>
