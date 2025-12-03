@@ -19,7 +19,7 @@ const TerminalLayout: React.FC<TerminalLayoutProps> = ({ children, onNavigateHom
             {SITE_CONFIG.title}
           </h1>
           <p className="text-sm mt-2 opacity-80">
-            > EST. 2024 | SYSTEM_READY | <span className="animate-blink inline-block w-2 h-4 bg-terminal-green align-middle"></span>
+            &gt; EST. 2024 | SYSTEM_READY | <span className="animate-blink inline-block w-2 h-4 bg-terminal-green align-middle"></span>
           </p>
         </div>
         <nav className="flex gap-4 text-sm font-bold">
@@ -46,8 +46,8 @@ const TerminalLayout: React.FC<TerminalLayoutProps> = ({ children, onNavigateHom
       {/* Footer */}
       <footer className="border-t border-terminal-dim mt-12 pt-6 text-xs md:text-sm text-center md:text-left flex flex-col md:flex-row justify-between opacity-70">
         <div className="mb-2 md:mb-0">
-          <p>> COPYRIGHT (C) {new Date().getFullYear()} {SITE_CONFIG.title}</p>
-          <p>> ALL_RIGHTS_RESERVED</p>
+          <p>&gt; COPYRIGHT (C) {new Date().getFullYear()} {SITE_CONFIG.title}</p>
+          <p>&gt; ALL_RIGHTS_RESERVED</p>
         </div>
         <div className="flex gap-4 justify-center md:justify-end">
           {SITE_CONFIG.socials.map(social => (
