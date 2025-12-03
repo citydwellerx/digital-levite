@@ -100,20 +100,24 @@
       .hidden {
         display: none !important;
       }
+      
+      /* Loading animation */
+      @keyframes blink {
+        0% { opacity: 0; }
+        50% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      .cursor-blink {
+        animation: blink 1s infinite;
+      }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/"
-  }
-}
-</script>
 </head>
 <body class="font-mono antialiased bg-paper text-ink">
 
     <div id="app" class="min-h-screen flex flex-col max-w-3xl mx-auto p-6 md:p-12 relative">
-        <!-- Content will be injected here by JavaScript -->
+        <div class="flex-grow flex items-center justify-center h-screen">
+            <p class="text-xl">Loading_System_Data<span class="cursor-blink">_</span></p>
+        </div>
     </div>
 
     <script>
@@ -128,78 +132,50 @@
             ]
         };
 
-        const BLOG_POSTS = [
-            {
-                id: '1',
-                title: 'Hello_World.txt',
-                date: '2025-12-03',
-                excerpt: 'Initializing the system. Why I chose a static text aesthetic for 2025.',
-                content: `
-                    <p>Welcome to <strong>The Digital Levite</strong>.</p>
-                    <p>In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p>
-                    <p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p>
-                    <p>Status: <span class="font-bold border-b border-ink">ONLINE</span>.</p>
-                `,
-                tags: ['meta', 'intro', 'minimalism']
-            },
-            {
-                id: '2',
-                title: 'The Sacred and The Silicon',
-                date: '2025-12-03',
-                excerpt: 'Reflections on maintaining spiritual discipline in a hyper-connected digital age.',
-                content: `
-                    <p>The Levites of old were set apart for service, maintaining the sacred spaces. Today, our "sacred spaces" are often digital. Our temples are servers; our rituals are routines.</p>
-                    <p>How do we maintain purity of thought when the algorithm is designed to pollute it with outrage? The answer isn't total disconnection—it's intentionality.</p>
-                    <ul>
-                        <li>Curate your inputs relentlessly.</li>
-                        <li>Practice digital sabbaths.</li>
-                        <li>Remember that you are the user, not the product.</li>
-                    </ul>
-                    <p>We must learn to walk through the digital fire without smelling of smoke.</p>
-                `,
-                tags: ['philosophy', 'theology', 'digital-health']
-            },
-            {
-                id: '3',
-                title: 'Stack Overflow Architecture',
-                date: '2025-12-03',
-                excerpt: 'Why copying and pasting code isn\'t engineering, but understanding it is.',
-                content: `
-                    <p>We've all done it. <code class="bg-gray-200 px-1 rounded">Ctrl+C</code>, <code class="bg-gray-200 px-1 rounded">Ctrl+V</code>. But the difference between a "coder" and an "engineer" is what happens in the milliseconds between those keystrokes.</p>
-                    <p>If you can't explain <em>why</em> the solution works, you haven't solved the problem; you've just deferred the bug to a later date.</p>
-                    <blockquote>
-                        "Understanding is the compression algorithm of knowledge."
-                    </blockquote>
-                    <p>Read the documentation. Read the source. Be the engineer.</p>
-                `,
-                tags: ['coding', 'career', 'advice']
-            },
-            {
-                id: '4',
-                title: 'End of Line',
-                date: '2025-12-03',
-                excerpt: 'A short poem about deprecated functions and lost data.',
-                content: `
-                    <p class="whitespace-pre-line">
-The cursor blinks, a steady heart,
-In voids where processes depart.
-A memory leaked, a pointer lost,
-We optimize, but at what cost?
-                    </p>
-                    <p class="whitespace-pre-line">
-The function returns, the stack unwinds,
-Leaving trace logs in our minds.
-Shutting down...
-                    </p>
-                `,
-                tags: ['poetry', 'creative']
-            }
+        // Fallback data in case 'posts.json' cannot be fetched (e.g., local file access blocking fetch)
+        const FALLBACK_POSTS = [
+          {
+            "id": "1",
+            "title": "Hello_World.txt",
+            "date": "2025-12-03",
+            "excerpt": "Initializing the system. Why I chose a static text aesthetic for 2025.",
+            "content": "<p>Welcome to <strong>The Digital Levite</strong>.</p><p>In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p><p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p><p>Status: <span class=\"font-bold border-b border-ink\">ONLINE</span>.</p>",
+            "tags": ["meta", "intro", "minimalism"]
+          },
+          {
+            "id": "2",
+            "title": "The Sacred and The Silicon",
+            "date": "2025-12-03",
+            "excerpt": "Reflections on maintaining spiritual discipline in a hyper-connected digital age.",
+            "content": "<p>The Levites of old were set apart for service, maintaining the sacred spaces. Today, our \"sacred spaces\" are often digital. Our temples are servers; our rituals are routines.</p><p>How do we maintain purity of thought when the algorithm is designed to pollute it with outrage? The answer isn't total disconnection—it's intentionality.</p><ul><li>Curate your inputs relentlessly.</li><li>Practice digital sabbaths.</li><li>Remember that you are the user, not the product.</li></ul><p>We must learn to walk through the digital fire without smelling of smoke.</p>",
+            "tags": ["philosophy", "theology", "digital-health"]
+          },
+          {
+            "id": "3",
+            "title": "Stack Overflow Architecture",
+            "date": "2025-12-03",
+            "excerpt": "Why copying and pasting code isn't engineering, but understanding it is.",
+            "content": "<p>We've all done it. <code class=\"bg-gray-200 px-1 rounded\">Ctrl+C</code>, <code class=\"bg-gray-200 px-1 rounded\">Ctrl+V</code>. But the difference between a \"coder\" and an \"engineer\" is what happens in the milliseconds between those keystrokes.</p><p>If you can't explain <em>why</em> the solution works, you haven't solved the problem; you've just deferred the bug to a later date.</p><blockquote>\"Understanding is the compression algorithm of knowledge.\"</blockquote><p>Read the documentation. Read the source. Be the engineer.</p>",
+            "tags": ["coding", "career", "advice"]
+          },
+          {
+            "id": "4",
+            "title": "End of Line",
+            "date": "2025-12-03",
+            "excerpt": "A short poem about deprecated functions and lost data.",
+            "content": "<p class=\"whitespace-pre-line\">The cursor blinks, a steady heart,\nIn voids where processes depart.\nA memory leaked, a pointer lost,\nWe optimize, but at what cost?</p><p class=\"whitespace-pre-line\">The function returns, the stack unwinds,\nLeaving trace logs in our minds.\nShutting down...</p>",
+            "tags": ["poetry", "creative"]
+          }
         ];
+
+        let BLOG_POSTS = [];
 
         // --- STATE MANAGEMENT ---
         const state = {
             view: 'LIST', // 'LIST' or 'DETAIL'
-            postId: null
+            postId: null,
+            loading: true,
+            error: null
         };
 
         // --- COMPONENTS (Template Functions) ---
@@ -246,6 +222,14 @@ Shutting down...
         }
 
         function PostList() {
+            if (BLOG_POSTS.length === 0) {
+                 return `
+                    <main class="flex-grow">
+                        <p class="text-ink-light italic">No entries found in the archive.</p>
+                    </main>
+                 `;
+            }
+
             const postsHtml = BLOG_POSTS.map(post => `
                 <li class="group">
                     <article class="cursor-pointer" onclick="navigateToPost('${post.id}')">
@@ -340,13 +324,41 @@ Shutting down...
                 </main>
             `;
         }
+        
+        function LoadingScreen() {
+             return `
+                <div class="flex-grow flex items-center justify-center h-64">
+                    <p class="text-xl">Loading_System_Data<span class="cursor-blink">_</span></p>
+                </div>
+             `;
+        }
+        
+        function ErrorScreen() {
+             return `
+                <div class="flex-grow flex flex-col items-center justify-center h-64 text-center">
+                    <h2 class="text-2xl font-bold mb-2">System Error</h2>
+                    <p class="text-ink-light mb-4">Could not load data file (posts.json).</p>
+                    <p class="text-xs font-mono bg-gray-200 p-2 rounded">${state.error}</p>
+                </div>
+             `;
+        }
 
         // --- APP LOGIC ---
 
         function render() {
             const app = document.getElementById('app');
-            let mainContent = '';
+            
+            if (state.loading) {
+                app.innerHTML = LoadingScreen();
+                return;
+            }
+            
+            if (state.error) {
+                app.innerHTML = ErrorScreen();
+                return;
+            }
 
+            let mainContent = '';
             if (state.view === 'LIST') {
                 mainContent = PostList();
             } else if (state.view === 'DETAIL') {
@@ -379,8 +391,31 @@ Shutting down...
             render();
         };
 
-        // Initial Render
-        render();
+        // Initialize and Fetch Data
+        async function init() {
+            try {
+                // Attempt to fetch 'posts.json'. 
+                // This might fail if running locally via file:// protocol due to CORS.
+                const response = await fetch('posts.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                BLOG_POSTS = await response.json();
+                console.log("Loaded posts from posts.json");
+            } catch (e) {
+                console.warn("Fetch failed (likely CORS or missing file). Using fallback data.", e);
+                // Fallback to internal data if external file fails
+                BLOG_POSTS = FALLBACK_POSTS;
+            } finally {
+                state.loading = false;
+                render();
+            }
+        }
+
+        // Start the app
+        init();
 
     </script>
 </body>
