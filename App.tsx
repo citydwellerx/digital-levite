@@ -40,14 +40,14 @@ const App: React.FC = () => {
       )}
       
       {viewState === 'DETAIL' && !currentPost && (
-        <div className="text-center py-20 border border-red-500 text-red-500">
-          <h2 className="text-2xl font-bold mb-2">ERROR 404</h2>
-          <p>&gt; DATA_CORRUPTED OR FILE_NOT_FOUND</p>
+        <div className="text-center py-24 text-ink">
+          <h2 className="text-3xl font-bold mb-4">Page Not Found</h2>
+          <p className="mb-8 text-ink-light italic">The page you are looking for has been moved or does not exist.</p>
           <button 
             onClick={handleNavigateHome}
-            className="mt-4 border border-red-500 px-4 py-2 hover:bg-red-500 hover:text-black"
+            className="border-b-2 border-ink pb-1 hover:bg-ink hover:text-paper transition-colors"
           >
-            RETURN_TO_ROOT
+            Return to Index
           </button>
         </div>
       )}
