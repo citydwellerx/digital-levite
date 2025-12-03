@@ -6,16 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- SEO Meta Tags -->
-    <title>The Digital Levite | Retro Tech Blog</title>
-    <meta name="description" content="The Digital Levite: A personal blog exploring technology, theology, and the spaces in between. Minimalist, terminal-styled, and content-first." />
-    <meta name="keywords" content="blog, tech, retro, terminal, minimalism, coding, digital levite" />
+    <title>The Digital Levite | Minimalist Tech Blog</title>
+    <meta name="description" content="The Digital Levite: A personal blog exploring technology, theology, and the spaces in between. Minimalist, content-first, and distraction-free." />
+    <meta name="keywords" content="blog, tech, minimalism, writing, coding, digital levite" />
     <meta name="author" content="The Digital Levite" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="The Digital Levite | Retro Tech Blog" />
-    <meta property="og:description" content="Exploring the intersection of code and consciousness in a retro terminal interface." />
+    <meta property="og:title" content="The Digital Levite | Minimalist Tech Blog" />
+    <meta property="og:description" content="Exploring the intersection of code and consciousness on digital paper." />
     
+    <!-- Google Fonts: Courier Prime -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -23,93 +28,70 @@
         theme: {
           extend: {
             colors: {
-              'terminal-black': '#0c0c0c',
-              'terminal-green': '#4af626',
-              'terminal-dim': '#1a3316',
-              'terminal-amber': '#ffb000',
+              'paper': '#fdfbf7',
+              'ink': '#111111',
+              'ink-light': '#555555',
+              'accent': '#e6e4df',
             },
             fontFamily: {
-              mono: ['"Fira Code"', '"Source Code Pro"', 'Consolas', 'Monaco', 'monospace'],
+              mono: ['"Courier Prime"', '"Courier New"', 'Courier', 'monospace'],
             },
-            animation: {
-              'blink': 'blink 1s step-end infinite',
-              'flicker': 'flicker 0.15s infinite',
-            },
-            keyframes: {
-              blink: {
-                '0%, 100%': { opacity: '1' },
-                '50%': { opacity: '0' },
+            typography: (theme) => ({
+              DEFAULT: {
+                css: {
+                  color: theme('colors.ink'),
+                  '--tw-prose-body': theme('colors.ink'),
+                  '--tw-prose-headings': theme('colors.ink'),
+                  '--tw-prose-links': theme('colors.ink'),
+                  '--tw-prose-bold': theme('colors.ink'),
+                  '--tw-prose-counters': theme('colors.ink-light'),
+                  '--tw-prose-bullets': theme('colors.ink-light'),
+                  '--tw-prose-hr': theme('colors.accent'),
+                  '--tw-prose-quotes': theme('colors.ink'),
+                  '--tw-prose-quote-borders': theme('colors.ink-light'),
+                  '--tw-prose-captions': theme('colors.ink-light'),
+                  '--tw-prose-code': theme('colors.ink'),
+                  '--tw-prose-pre-code': theme('colors.paper'),
+                  '--tw-prose-pre-bg': theme('colors.ink'),
+                },
               },
-              flicker: {
-                '0%': { opacity: '0.97' },
-                '100%': { opacity: '1' },
-              }
-            }
+            }),
           }
-        }
+        },
+        plugins: [
+           // Mocking the typography plugin behavior for the CDN version via custom styles in prose class
+        ]
       }
     </script>
 
-    <!-- Custom CRT Effects -->
+    <!-- Global Styles -->
     <style>
       body {
-        background-color: #0c0c0c;
-        color: #4af626;
+        background-color: #fdfbf7;
+        color: #111111;
         margin: 0;
-        overflow-x: hidden;
-      }
-      
-      /* CRT Scanline Effect */
-      .scanlines::before {
-        content: " ";
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(18, 16, 16, 0) 50%,
-          rgba(0, 0, 0, 0.25) 50%
-        );
-        background-size: 100% 4px;
-        z-index: 50;
-        pointer-events: none;
-      }
-      
-      /* Subtle vignette */
-      .vignette::after {
-        content: " ";
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background: radial-gradient(
-          circle,
-          rgba(0, 0, 0, 0) 60%,
-          rgba(0, 0, 0, 0.4) 100%
-        );
-        z-index: 50;
-        pointer-events: none;
+        line-height: 1.6;
       }
 
-      /* Custom Scrollbar */
+      /* Custom selection color */
+      ::selection {
+        background: #111111;
+        color: #fdfbf7;
+      }
+
+      /* Custom Scrollbar for subtle look */
       ::-webkit-scrollbar {
-        width: 10px;
+        width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #0c0c0c;
-        border-left: 1px solid #1a3316;
+        background: #fdfbf7;
       }
       ::-webkit-scrollbar-thumb {
-        background: #1a3316;
-        border: 1px solid #4af626;
+        background: #e6e4df;
+        border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #4af626;
+        background: #ccc;
       }
     </style>
   <script type="importmap">
@@ -121,10 +103,8 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
-  <body class="font-mono scanlines vignette antialiased selection:bg-terminal-green selection:text-terminal-black">
+  <body class="font-mono antialiased">
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+  </body>
 </html>
