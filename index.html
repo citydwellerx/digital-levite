@@ -6,6 +6,11 @@
     <meta name="description" content="The Digital Levite - A minimalist, typewriter-style personal blog.">
     <title>The Digital Levite</title>
     
+    <!-- Google Fonts: Courier Prime for that authentic, sturdy typewriter look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     
@@ -21,7 +26,8 @@
             --bg-color: #fdfbf7;      
             --text-color: #111111;    
             --accent-color: #666666;  
-            --font-family: 'Courier Prime', 'Courier New', monospace;
+            /* Using Courier Prime explicitly for better weight */
+            --font-family: 'Courier Prime', monospace; 
             --link-hover: #000000;
             
             /* OPTION B: GREEN TERMINAL (Uncomment to activate) */
@@ -40,6 +46,11 @@
             font-family: var(--font-family);
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Ensure bold text is actually bold */
+        strong, b, h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
         }
 
         a {
@@ -117,24 +128,28 @@
                 "id": "1",
                 "title": "Hello_World.txt",
                 "date": "2025-12-03",
+                "excerpt": "Initializing the system. Why I chose a static text aesthetic for 2025.",
                 "content": "<p>Welcome to <strong>The Digital Levite</strong>.</p><p>In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p><p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p><p>Status: <span class=\"font-bold border-b border-black\">ONLINE</span>.</p>"
             },
             {
                 "id": "2",
                 "title": "The Sacred and The Silicon",
                 "date": "2025-12-03",
+                "excerpt": "Reflections on maintaining spiritual discipline in a hyper-connected digital age.",
                 "content": "<p>The Levites of old were set apart for service, maintaining the sacred spaces. Today, our \"sacred spaces\" are often digital. Our temples are servers; our rituals are routines.</p><p>How do we maintain purity of thought when the algorithm is designed to pollute it with outrage? The answer isn't total disconnection—it's intentionality.</p><ul class=\"list-disc\"><li class=\"marker:text-gray-500\">Curate your inputs relentlessly.</li><li class=\"marker:text-gray-500\">Practice digital sabbaths.</li><li class=\"marker:text-gray-500\">Remember that you are the user, not the product.</li></ul><p>We must learn to walk through the digital fire without smelling of smoke.</p>"
             },
             {
                 "id": "3",
                 "title": "Stack Overflow Architecture",
                 "date": "2025-12-03",
+                "excerpt": "Why copying and pasting code isn't engineering, but understanding it is.",
                 "content": "<p>We've all done it. <code class=\"bg-gray-200 px-1 rounded text-sm\">Ctrl+C</code>, <code class=\"bg-gray-200 px-1 rounded text-sm\">Ctrl+V</code>. But the difference between a \"coder\" and an \"engineer\" is what happens in the milliseconds between those keystrokes.</p><p>If you can't explain <em>why</em> the solution works, you haven't solved the problem; you've just deferred the bug to a later date.</p><blockquote>\"Understanding is the compression algorithm of knowledge.\"</blockquote><p>Read the documentation. Read the source. Be the engineer.</p>"
             },
             {
                 "id": "4",
                 "title": "End of Line",
                 "date": "2025-12-03",
+                "excerpt": "A short poem about deprecated functions and lost data.",
                 "content": "<p class=\"whitespace-pre-line\">The cursor blinks, a steady heart,\nIn voids where processes depart.\nA memory leaked, a pointer lost,\nWe optimize, but at what cost?</p><p class=\"whitespace-pre-line\">The function returns, the stack unwinds,\nLeaving trace logs in our minds.\nShutting down...</p>"
             }
         ];
@@ -166,18 +181,22 @@
             // Sort: Newest first
             posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            let html = `<div class="space-y-10 animate-fade-in">`;
+            let html = `<div class="space-y-12 animate-fade-in">`;
             posts.forEach(post => {
                 html += `
                     <article class="group">
-                        <div class="flex items-baseline space-x-4 mb-1 opacity-50 text-xs font-mono">
+                        <div class="flex items-baseline space-x-4 mb-2 opacity-50 text-xs font-mono">
                             <span>> ${post.date}</span>
                             <span>ID: ${post.id}</span>
                         </div>
-                        <h2 class="text-2xl font-bold cursor-pointer hover:underline decoration-2 underline-offset-4" 
+                        <h2 class="text-2xl font-bold cursor-pointer hover:underline decoration-2 underline-offset-4 mb-2 text-gray-900" 
                             onclick="renderPost('${post.id}')">
                             ${post.title}
                         </h2>
+                        <!-- Excerpt Section -->
+                        <p class="text-gray-600 text-sm md:text-base leading-relaxed max-w-2xl">
+                           ${post.excerpt || ""}
+                        </p>
                     </article>
                 `;
             });
@@ -212,14 +231,14 @@
                             << BACK_TO_INDEX
                         </button>
                         <article>
-                            <h1 class="text-3xl md:text-4xl font-bold mb-4">${post.title}</h1>
-                            <div class="flex justify-between items-center text-xs opacity-50 font-mono mb-12 border-b border-gray-200 pb-4">
+                            <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">${post.title}</h1>
+                            <div class="flex justify-between items-center text-xs opacity-50 font-mono mb-12 border-b border-gray-300 pb-4">
                                 <time>${post.date}</time>
                                 <span>ID: ${post.id}</span>
                             </div>
                             
                             <!-- The 'prose' class here applies our CSS spacing fixes -->
-                            <div class="prose prose-stone text-lg leading-relaxed">
+                            <div class="prose prose-stone prose-lg text-gray-800 leading-relaxed font-normal">
                                 ${contentHtml}
                             </div>
                         </article>
