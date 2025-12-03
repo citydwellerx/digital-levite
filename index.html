@@ -1,410 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://picsum.photos/32/32" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Digital Levite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- SEO Meta Tags -->
-    <title>The Digital Levite | Minimalist Tech Blog</title>
-    <meta name="description" content="The Digital Levite: A personal blog exploring technology, theology, and the spaces in between. Minimalist, content-first, and distraction-free." />
-    <meta name="keywords" content="blog, tech, minimalism, writing, coding, digital levite" />
-    <meta name="author" content="The Digital Levite" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="The Digital Levite | Minimalist Tech Blog" />
-    <meta property="og:description" content="Exploring the intersection of code and consciousness on digital paper." />
-    
-    <!-- Google Fonts: Courier Prime -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS (with Typography Plugin) -->
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'paper': '#fdfbf7',
-              'ink': '#111111',
-              'ink-light': '#555555',
-              'accent': '#e6e4df',
-            },
-            fontFamily: {
-              mono: ['"Courier Prime"', '"Courier New"', 'Courier', 'monospace'],
-            },
-            typography: (theme) => ({
-              DEFAULT: {
-                css: {
-                  color: theme('colors.ink'),
-                  '--tw-prose-body': theme('colors.ink'),
-                  '--tw-prose-headings': theme('colors.ink'),
-                  '--tw-prose-links': theme('colors.ink'),
-                  '--tw-prose-bold': theme('colors.ink'),
-                  '--tw-prose-counters': theme('colors.ink-light'),
-                  '--tw-prose-bullets': theme('colors.ink-light'),
-                  '--tw-prose-hr': theme('colors.accent'),
-                  '--tw-prose-quotes': theme('colors.ink'),
-                  '--tw-prose-quote-borders': theme('colors.ink-light'),
-                  '--tw-prose-captions': theme('colors.ink-light'),
-                  '--tw-prose-code': theme('colors.ink'),
-                  '--tw-prose-pre-code': theme('colors.paper'),
-                  '--tw-prose-pre-bg': theme('colors.ink'),
-                },
-              },
-            }),
-          }
-        }
-      }
-    </script>
-
-    <!-- Global Styles -->
     <style>
-    /* =========================================
-       THEME CONTROL PANEL
-       (Move the /* comments */ to switch vibes)
-       ========================================= */
+        /* =========================================
+           THEME CONTROL PANEL
+           ========================================= */
+        :root {
+            /* TYPEWRITER THEME (Active) */
+            --bg-color: #fdfbf7;      
+            --text-color: #111111;    
+            --accent-color: #666666;  
+            --font-family: 'Courier Prime', 'Courier New', monospace;
+            
+            /* UNCOMMENT FOR GREEN TERMINAL THEME
+            --bg-color: #0a0a0a;      
+            --text-color: #00ff41;    
+            --accent-color: #008F11;  
+            */
+        }
 
-    /* --- OPTION A: MINIMALIST TYPEWRITER (Active) --- */
-    :root {
-        --bg-color: #fdfbf7;      /* Off-White Paper */
-        --text-color: #111111;    /* Ink Black */
-        --accent-color: #666666;  /* Grey Accents */
-        --font-family: 'Courier Prime', 'Courier New', monospace;
-    }
-
-    /* --- OPTION B: GREEN TERMINAL (Disabled) --- 
-    :root {
-        --bg-color: #0a0a0a;      /* Deep Space Black */
-        --text-color: #00ff41;    /* Retro Green */
-        --accent-color: #008F11;  /* Darker Green */
-        --font-family: 'Courier New', monospace;
-    }
-    -------------------------------------------------- */
-
-    /* GLOBAL STYLES (Do not touch) */
-    body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        font-family: var(--font-family);
-        transition: background-color 0.3s, color 0.3s; /* Smooth fade when switching */
-    }
-
-    /* Force Tailwind elements to obey our variables */
-    .border-terminal-green { border-color: var(--accent-color) !important; }
-    .text-terminal-green { color: var(--text-color) !important; }
-    a { color: var(--text-color); text-decoration: underline; }
-    a:hover { color: var(--accent-color); }
-</style>
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+        }
+        
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+    </style>
 </head>
-<body class="font-mono antialiased bg-paper text-ink">
+<body class="min-h-screen p-8 max-w-3xl mx-auto">
 
-    <div id="app" class="min-h-screen flex flex-col max-w-3xl mx-auto p-6 md:p-12 relative">
-        <div class="flex-grow flex items-center justify-center h-screen">
-            <p class="text-xl">Loading_System_Data<span class="cursor-blink">_</span></p>
+    <header class="mb-12 border-b border-gray-300 pb-4">
+        <h1 class="text-3xl font-bold mb-2">The Digital Levite</h1>
+        <div class="flex justify-between text-sm opacity-70">
+            <span>> EST. 2025 | SIGNAL_ACTIVE</span>
+            <span class="blink">_</span>
         </div>
-    </div>
+        <nav class="mt-4 space-x-4 text-sm underline">
+            <a href="#" onclick="renderList()">Index</a>
+            <a href="mailto:your-email@example.com">Contact</a>
+        </nav>
+    </header>
+
+    <main id="app">
+        </main>
+
+    <footer class="mt-20 text-center text-xs opacity-50">
+        <p>&gt; NO COMMENTS ALLOWED. SEND BRICKS VIA EMAIL.</p>
+    </footer>
 
     <script>
-        // --- DATA ---
-        const SITE_CONFIG = {
-            title: 'The Digital Levite',
-            contactEmail: 'contact@digitallevite.com',
-            socials: [
-                { name: 'Github', url: '#' },
-                { name: 'Twitter', url: '#' },
-                { name: 'RSS', url: '#' }
-            ]
-        };
-
-        // Fallback data in case 'posts.json' cannot be fetched (e.g., local file access blocking fetch)
-        const FALLBACK_POSTS = [
-          {
-            "id": "1",
-            "title": "Hello_World.txt",
-            "date": "2025-12-03",
-            "excerpt": "Initializing the system. Why I chose a static text aesthetic for 2025.",
-            "content": "<p>Welcome to <strong>The Digital Levite</strong>.</p><p>In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p><p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p><p>Status: <span class=\"font-bold border-b border-ink\">ONLINE</span>.</p>",
-            "tags": ["meta", "intro", "minimalism"]
-          },
-          {
-            "id": "2",
-            "title": "The Sacred and The Silicon",
-            "date": "2025-12-03",
-            "excerpt": "Reflections on maintaining spiritual discipline in a hyper-connected digital age.",
-            "content": "<p>The Levites of old were set apart for service, maintaining the sacred spaces. Today, our \"sacred spaces\" are often digital. Our temples are servers; our rituals are routines.</p><p>How do we maintain purity of thought when the algorithm is designed to pollute it with outrage? The answer isn't total disconnection—it's intentionality.</p><ul><li>Curate your inputs relentlessly.</li><li>Practice digital sabbaths.</li><li>Remember that you are the user, not the product.</li></ul><p>We must learn to walk through the digital fire without smelling of smoke.</p>",
-            "tags": ["philosophy", "theology", "digital-health"]
-          },
-          {
-            "id": "3",
-            "title": "Stack Overflow Architecture",
-            "date": "2025-12-03",
-            "excerpt": "Why copying and pasting code isn't engineering, but understanding it is.",
-            "content": "<p>We've all done it. <code class=\"bg-gray-200 px-1 rounded\">Ctrl+C</code>, <code class=\"bg-gray-200 px-1 rounded\">Ctrl+V</code>. But the difference between a \"coder\" and an \"engineer\" is what happens in the milliseconds between those keystrokes.</p><p>If you can't explain <em>why</em> the solution works, you haven't solved the problem; you've just deferred the bug to a later date.</p><blockquote>\"Understanding is the compression algorithm of knowledge.\"</blockquote><p>Read the documentation. Read the source. Be the engineer.</p>",
-            "tags": ["coding", "career", "advice"]
-          },
-          {
-            "id": "4",
-            "title": "End of Line",
-            "date": "2025-12-03",
-            "excerpt": "A short poem about deprecated functions and lost data.",
-            "content": "<p class=\"whitespace-pre-line\">The cursor blinks, a steady heart,\nIn voids where processes depart.\nA memory leaked, a pointer lost,\nWe optimize, but at what cost?</p><p class=\"whitespace-pre-line\">The function returns, the stack unwinds,\nLeaving trace logs in our minds.\nShutting down...</p>",
-            "tags": ["poetry", "creative"]
-          }
-        ];
-
-        let BLOG_POSTS = [];
-
-        // --- STATE MANAGEMENT ---
-        const state = {
-            view: 'LIST', // 'LIST' or 'DETAIL'
-            postId: null,
-            loading: true,
-            error: null
-        };
-
-        // --- COMPONENTS (Template Functions) ---
-        
-        function Header() {
-            return `
-                <header class="border-b-2 border-ink pb-6 mb-12 flex flex-col md:flex-row justify-between items-start md:items-baseline gap-4">
-                    <div>
-                        <h1 onclick="navigateToHome()" 
-                            class="text-3xl md:text-4xl font-bold tracking-tight cursor-pointer hover:underline decoration-2 underline-offset-4">
-                            ${SITE_CONFIG.title}
-                        </h1>
-                        <p class="text-sm mt-2 text-ink-light italic">
-                            Est. 2025 | Drafts & Digital Thoughts
-                        </p>
-                    </div>
-                    <nav class="flex gap-6 text-sm font-bold">
-                        <button onclick="navigateToHome()" class="hover:underline underline-offset-4 decoration-2">
-                            Index
-                        </button>
-                        <a href="mailto:${SITE_CONFIG.contactEmail}" class="hover:underline underline-offset-4 decoration-2">
-                            Contact
-                        </a>
-                    </nav>
-                </header>
-            `;
-        }
-
-        function Footer() {
-            const socialLinks = SITE_CONFIG.socials.map(social => 
-                `<a href="${social.url}" class="hover:text-ink hover:underline transition-colors">${social.name}</a>`
-            ).join('');
-
-            return `
-                <footer class="mt-16 pt-8 border-t border-accent text-xs md:text-sm flex flex-col md:flex-row justify-between text-ink-light">
-                    <div class="mb-2 md:mb-0">
-                        <p>&copy; ${new Date().getFullYear()} ${SITE_CONFIG.title}. All rights reserved.</p>
-                    </div>
-                    <div class="flex gap-4">
-                        ${socialLinks}
-                    </div>
-                </footer>
-            `;
-        }
-
-        function PostList() {
-            if (BLOG_POSTS.length === 0) {
-                 return `
-                    <main class="flex-grow">
-                        <p class="text-ink-light italic">No entries found in the archive.</p>
-                    </main>
-                 `;
+        // 1. Fetch the Bricks from your JSON file
+        async function loadPosts() {
+            try {
+                const response = await fetch('posts.json');
+                if (!response.ok) throw new Error("Signal Lost");
+                const posts = await response.json();
+                return posts;
+            } catch (e) {
+                document.getElementById('app').innerHTML = `<p>> ERROR: COULD NOT LOAD BRICKS. CHECK POSTS.JSON</p>`;
+                return [];
             }
-
-            const postsHtml = BLOG_POSTS.map(post => `
-                <li class="group">
-                    <article class="cursor-pointer" onclick="navigateToPost('${post.id}')">
-                        <div class="flex flex-col mb-2">
-                            <h2 class="text-2xl font-bold group-hover:underline decoration-2 underline-offset-4 mb-1">
-                                ${post.title}
-                            </h2>
-                            <time class="text-sm text-ink-light font-mono">
-                                ${post.date}
-                            </time>
-                        </div>
-                        
-                        <p class="text-ink-light mb-3 leading-relaxed max-w-2xl">
-                            ${post.excerpt}
-                        </p>
-                        
-                        <div class="flex gap-3 text-xs uppercase tracking-widest text-ink-light opacity-80">
-                            ${post.tags.map(tag => `<span class="bg-accent px-1.5 py-0.5 rounded-sm">#${tag}</span>`).join('')}
-                        </div>
-                    </article>
-                </li>
-            `).join('');
-
-            return `
-                <main class="flex-grow">
-                    <div class="space-y-12">
-                        <ul class="space-y-12">
-                            ${postsHtml}
-                        </ul>
-                    </div>
-                </main>
-            `;
         }
 
-        function PostDetail(post) {
-            if (!post) return NotFound();
-
-            const tagsHtml = post.tags.map(tag => 
-                `<span class="border border-accent px-2 py-1 rounded-sm">${tag}</span>`
-            ).join('');
-
-            return `
-                <main class="flex-grow">
-                    <div>
-                        <button onclick="navigateToHome()" class="mb-8 text-sm hover:underline underline-offset-4 flex items-center gap-2 group">
-                            <span>&larr;</span> Back to Index
-                        </button>
-
-                        <article class="max-w-none">
-                            <header class="mb-10 pb-8 border-b border-accent">
-                                <div class="flex flex-wrap gap-2 mb-6 text-xs uppercase tracking-widest text-ink-light">
-                                    ${tagsHtml}
-                                </div>
-                                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-                                    ${post.title}
-                                </h1>
-                                <time class="text-sm text-ink-light italic">
-                                    Published on ${post.date}
-                                </time>
-                            </header>
-
-                            <div class="prose prose-lg prose-headings:font-bold prose-p:leading-loose prose-a:underline prose-a:decoration-ink-light prose-a:underline-offset-2 hover:prose-a:text-ink hover:prose-a:decoration-ink max-w-none">
-                                ${post.content}
-                            </div>
-
-                            <div class="mt-16 pt-8 border-t border-accent flex justify-center text-ink-light text-2xl tracking-widest">
-                                <p>***</p>
-                            </div>
-                        </article>
-
-                        <div class="mt-12 flex justify-center">
-                            <a href="mailto:${SITE_CONFIG.contactEmail}?subject=Re: ${post.title}" 
-                               class="text-sm border-b border-ink pb-0.5 hover:border-b-2 hover:font-bold transition-all">
-                                Reply via Email
-                            </a>
-                        </div>
-                    </div>
-                </main>
-            `;
-        }
-
-        function NotFound() {
-            return `
-                <main class="flex-grow">
-                    <div class="text-center py-24 text-ink">
-                        <h2 class="text-3xl font-bold mb-4">Page Not Found</h2>
-                        <p class="mb-8 text-ink-light italic">The page you are looking for has been moved or does not exist.</p>
-                        <button onclick="navigateToHome()" class="border-b-2 border-ink pb-1 hover:bg-ink hover:text-paper transition-colors">
-                            Return to Index
-                        </button>
-                    </div>
-                </main>
-            `;
-        }
-        
-        function LoadingScreen() {
-             return `
-                <div class="flex-grow flex items-center justify-center h-64">
-                    <p class="text-xl">Loading_System_Data<span class="cursor-blink">_</span></p>
-                </div>
-             `;
-        }
-        
-        function ErrorScreen() {
-             return `
-                <div class="flex-grow flex flex-col items-center justify-center h-64 text-center">
-                    <h2 class="text-2xl font-bold mb-2">System Error</h2>
-                    <p class="text-ink-light mb-4">Could not load data file (posts.json).</p>
-                    <p class="text-xs font-mono bg-gray-200 p-2 rounded">${state.error}</p>
-                </div>
-             `;
-        }
-
-        // --- APP LOGIC ---
-
-        function render() {
+        // 2. Render the List of Posts
+        async function renderList() {
+            const posts = await loadPosts();
             const app = document.getElementById('app');
             
-            if (state.loading) {
-                app.innerHTML = LoadingScreen();
-                return;
-            }
-            
-            if (state.error) {
-                app.innerHTML = ErrorScreen();
-                return;
-            }
+            let html = `<div class="space-y-8">`;
+            posts.forEach(post => {
+                html += `
+                    <article class="cursor-pointer hover:opacity-70 transition" onclick="renderPost('${post.slug}')">
+                        <p class="text-xs mb-1 opacity-60">> ${post.date}</p>
+                        <h2 class="text-xl font-bold underline">${post.title}</h2>
+                    </article>
+                `;
+            });
+            html += `</div>`;
+            app.innerHTML = html;
+        }
 
-            let mainContent = '';
-            if (state.view === 'LIST') {
-                mainContent = PostList();
-            } else if (state.view === 'DETAIL') {
-                const post = BLOG_POSTS.find(p => p.id === state.postId);
-                mainContent = PostDetail(post);
-            }
+        // 3. Render a Single Post
+        async function renderPost(slug) {
+            const posts = await loadPosts();
+            const post = posts.find(p => p.slug === slug);
+            const app = document.getElementById('app');
 
-            app.innerHTML = `
-                ${Header()}
-                ${mainContent}
-                ${Footer()}
-            `;
-
-            // If we just rendered a detail view, scroll to top
-            if (state.view === 'DETAIL') {
-                window.scrollTo(0, 0);
+            if (post) {
+                app.innerHTML = `
+                    <div class="animate-fade-in">
+                        <button onclick="renderList()" class="mb-6 text-sm hover:underline"><< RETURN_TO_INDEX</button>
+                        <article class="prose prose-stone">
+                            <h1 class="text-2xl font-bold mb-2">${post.title}</h1>
+                            <time class="text-xs opacity-60 block mb-8">> LOGGED: ${post.date}</time>
+                            <div class="whitespace-pre-wrap">${post.content}</div>
+                        </article>
+                    </div>
+                `;
             }
         }
 
-        // Global functions for inline event handlers
-        window.navigateToPost = function(id) {
-            state.view = 'DETAIL';
-            state.postId = id;
-            render();
-        };
-
-        window.navigateToHome = function() {
-            state.view = 'LIST';
-            state.postId = null;
-            render();
-        };
-
-        // Initialize and Fetch Data
-        async function init() {
-            try {
-                // Attempt to fetch 'posts.json'. 
-                // This might fail if running locally via file:// protocol due to CORS.
-                const response = await fetch('posts.json');
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                BLOG_POSTS = await response.json();
-                console.log("Loaded posts from posts.json");
-            } catch (e) {
-                console.warn("Fetch failed (likely CORS or missing file). Using fallback data.", e);
-                // Fallback to internal data if external file fails
-                BLOG_POSTS = FALLBACK_POSTS;
-            } finally {
-                state.loading = false;
-                render();
-            }
-        }
-
-        // Start the app
-        init();
-
+        // Start System
+        renderList();
     </script>
 </body>
 </html>
