@@ -17,14 +17,6 @@
   },
   {
     "id": "3",
-    "title": "Stack Overflow Architecture",
-    "date": "2025-12-03",
-    "excerpt": "Why copying and pasting code isn't engineering, but understanding it is.",
-    "content": "<p>We've all done it. <code class=\"bg-gray-200 px-1 rounded\">Ctrl+C</code>, <code class=\"bg-gray-200 px-1 rounded\">Ctrl+V</code>. But the difference between a \"coder\" and an \"engineer\" is what happens in the milliseconds between those keystrokes.</p><p>If you can't explain <em>why</em> the solution works, you haven't solved the problem; you've just deferred the bug to a later date.</p><blockquote>\"Understanding is the compression algorithm of knowledge.\"</blockquote><p>Read the documentation. Read the source. Be the engineer.</p>",
-    "tags": ["coding", "career", "advice"]
-  },
-  {
-    "id": "4",
     "title": "Discovery",
     "date": "2025-12-04",
     "excerpt": "The most precious thing I received was the discovery that I am neurodivergent",
