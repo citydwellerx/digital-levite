@@ -102,6 +102,26 @@
             font-style: italic;
             opacity: 0.8;
         }
+        /* =========================================
+           VINTAGE IMAGE PROTOCOL
+           ========================================= */
+        
+        /* The Base Style (Applied to images in your posts) */
+        .prose img {
+            border-radius: 4px;
+            /* The Vintage Filter: Grayscale + Sepia + Low Contrast */
+            filter: grayscale(100%) sepia(20%) contrast(1.1);
+            transition: all 0.5s ease; /* Smooth transition */
+            opacity: 0.9;
+        }
+
+        /* The Reveal (When you hover) */
+        .prose img:hover {
+            filter: none; /* Restore full color */
+            opacity: 1;
+            transform: scale(1.02); /* Slight pop */
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body class="min-h-screen p-6 md:p-12 max-w-3xl mx-auto flex flex-col">
