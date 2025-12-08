@@ -71,32 +71,107 @@
         }
 
         .ai-voice {
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --text-color: #1a1a1a;
+            --accent-color: #666;
+            /* Using system fonts stack for speed and reliability */
+            --font-serif: "Georgia", "Times New Roman", serif;
+            --font-mono: "Menlo", "Consolas", "Courier New", monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            font-size: 18px; /* Standardized base size */
+        }
+
+        /* HEADER */
+        header {
+            margin-bottom: 60px;
+            border-bottom: 2px solid #eee; /* Slightly thicker line */
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.2rem; /* Much bigger title */
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        nav a {
             font-family: var(--font-mono);
             font-size: 0.9rem;
+            color: #555;
+            text-decoration: none;
+            margin-right: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #000;
+            border-bottom: 1px solid #000;
+        }
+
+        /* CONTENT */
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 1.5em; /* Breathing room */
+        }
+
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-top: 50px;
+            margin-bottom: 15px;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        /* THE VOICES */
+        .human-voice {
+            /* Inherits default serif font */
+            color: #222;
+        }
+
+        .ai-voice {
+            font-family: var(--font-mono);
+            font-size: 0.95rem; /* Slightly smaller to look like code */
             background: #f4f4f4;
-            padding: 15px;
-            border-left: 3px solid #333;
-            margin: 20px 0;
+            padding: 20px;
+            border-left: 4px solid #333;
+            margin: 25px 0;
+            color: #333;
         }
 
-        .protocol-list {
-            list-style: none;
-            padding: 0;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-        }
-        
-        .protocol-list li {
-            margin-bottom: 8px;
-        }
-
+        /* BADGES */
         .badge {
             display: inline-block;
             background: #000;
             color: #fff;
-            padding: 2px 6px;
-            font-size: 0.7rem;
-            margin-right: 8px;
+            padding: 3px 8px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            margin-right: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
 </head>
