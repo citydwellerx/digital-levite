@@ -1,288 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Digital Levite - of faith, neurodivergence and other obsessions.">
-    <title>The Digital Levite</title>
-    
-    <!-- Google Fonts: Courier Prime for that authentic, sturdy typewriter look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    
-    <!-- Marked.js for Markdown parsing (optional, but good for future) -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
-    <style>
         /* =========================================
-           THEME CONTROL PANEL
+           TERTIUS VOICE PROTOCOLS
+           (Added to support the new post format)
            ========================================= */
-        :root {
-            /* OPTION A: TYPEWRITER THEME (Active) */
-            --bg-color: #fdfbf7;      
-            --text-color: #111111;    
-            --accent-color: #666666;  
-            /* Using Courier Prime explicitly for better weight */
-            --font-family: 'Courier Prime', monospace; 
-            --link-hover: #000000;
-            
-            /* OPTION B: GREEN TERMINAL (Uncomment to activate) */
-            /*
-            --bg-color: #0d1117;      
-            --text-color: #00ff41;    
-            --accent-color: #008F11;
-            --link-hover: #ffffff;
-            --font-family: 'Courier New', monospace;
-            */
+           
+        /* The Container for AI Analysis */
+        .ai-voice {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9em;
+            background-color: #f4f4f4; /* Light Grey Background */
+            padding: 1.5rem;
+            border-left: 4px solid #333; /* Dark Bar on the left */
+            margin: 2rem 0;
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        /* Ensure bold text is actually bold */
-        strong, b, h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-        }
-
-        a {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            text-decoration-color: var(--accent-color);
-            transition: all 0.2s;
-        }
-
-        a:hover {
-            color: var(--link-hover);
-            text-decoration-thickness: 2px;
+        /* The Badge (HUMAN / TERTIUS labels) */
+        .badge {
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-family: 'Courier Prime', monospace;
+            margin-right: 0.5rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
         }
         
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-
-        /* TYPOGRAPHY FIXES (For Spacing) */
-        .prose {
-            max-width: none;
+        /* Optional: Ensure strong visual distinction for Human voice too if needed */
+        .human-voice {
+             font-family: 'Courier Prime', monospace;
         }
-        /* Add breathing room between paragraphs */
-        .prose p {
-            margin-bottom: 1.5em;
-        }
-        .prose ul, .prose ol {
-            margin-bottom: 1.5em;
-            padding-left: 1.5em;
-        }
-        .prose li {
-            margin-bottom: 0.5em;
-        }
-        .prose blockquote {
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1em;
-            margin-left: 0;
-            margin-bottom: 1.5em;
-            font-style: italic;
-            opacity: 0.8;
-        }
-    </style>
-</head>
-<body class="min-h-screen p-6 md:p-12 max-w-3xl mx-auto flex flex-col">
-
-    <header class="mb-16 border-b border-gray-300 pb-6">
-        <h1 class="text-3xl md:text-4xl font-bold mb-3 tracking-tight">The Digital Levite & Tertius</h1>
-        <div class="flex justify-between text-xs md:text-sm uppercase tracking-widest opacity-60 font-mono">
-            <span>> EST. 2025 | SIGNAL_ACTIVE</span>
-            <span class="blink">_</span>
-        </div>
-        <nav class="mt-6 space-x-6 text-sm">
-            <a href="#" onclick="renderList(); return false;">Index</a>
-            <a href="about.html" style="margin-right: 20px;">About</a>
-            <a href="mailto:heyho@digitallevite.space">Contact</a>
-        </nav>
-    </header>
-
-    <main id="app" class="flex-grow">
-        <!-- Content injects here -->
-        <div class="animate-pulse opacity-50">> Loading protocols...</div>
-    </main>
-
-    <footer class="mt-20 pt-8 border-t border-gray-200 text-center text-[10px] md:text-xs opacity-40 uppercase tracking-widest font-mono">
-        <p>&gt; NO COMMENTS. NO TRACKERS. JUST TEXT.</p>
-        <p class="mt-2">© 2025 The Digital Levite</p>
-    </footer>
-
-    <script>
-        // =========================================
-        // DATA LAYER
-        // =========================================
-
-        // FALLBACK DATA: This loads if posts.json is missing or fetch fails.
-        const FALLBACK_POSTS = [
-            {
-                "id": "1",
-                "title": "Hello_World.txt",
-                "date": "2025-12-03",
-                "excerpt": "Initializing the system. Why I chose a static text aesthetic for 2025.",
-                "content": "<p>Welcome to <strong>The Digital Levite</strong>.</p><p>In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p><p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p><p>Status: <span class=\"font-bold border-b border-black\">ONLINE</span>.</p>"
-            },
-            {
-                "id": "2",
-                "title": "The Sacred and The Silicon",
-                "date": "2025-12-03",
-                "excerpt": "Reflections on maintaining spiritual discipline in a hyper-connected digital age.",
-                "content": "<p>The Levites of old were set apart for service, maintaining the sacred spaces. Today, our \"sacred spaces\" are often digital. Our temples are servers; our rituals are routines.</p><p>How do we maintain purity of thought when the algorithm is designed to pollute it with outrage? The answer isn't total disconnection—it's intentionality.</p><ul class=\"list-disc\"><li class=\"marker:text-gray-500\">Curate your inputs relentlessly.</li><li class=\"marker:text-gray-500\">Practice digital sabbaths.</li><li class=\"marker:text-gray-500\">Remember that you are the user, not the product.</li></ul><p>We must learn to walk through the digital fire without smelling of smoke.</p>"
-            },
-            {
-                "id": "3",
-                "title": "Stack Overflow Architecture",
-                "date": "2025-12-03",
-                "excerpt": "Why copying and pasting code isn't engineering, but understanding it is.",
-                "content": "<p>We've all done it. <code class=\"bg-gray-200 px-1 rounded text-sm\">Ctrl+C</code>, <code class=\"bg-gray-200 px-1 rounded text-sm\">Ctrl+V</code>. But the difference between a \"coder\" and an \"engineer\" is what happens in the milliseconds between those keystrokes.</p><p>If you can't explain <em>why</em> the solution works, you haven't solved the problem; you've just deferred the bug to a later date.</p><blockquote>\"Understanding is the compression algorithm of knowledge.\"</blockquote><p>Read the documentation. Read the source. Be the engineer.</p>"
-            },
-            {
-                "id": "4",
-                "title": "End of Line",
-                "date": "2025-12-03",
-                "excerpt": "A short poem about deprecated functions and lost data.",
-                "content": "<p class=\"whitespace-pre-line\">The cursor blinks, a steady heart,\nIn voids where processes depart.\nA memory leaked, a pointer lost,\nWe optimize, but at what cost?</p><p class=\"whitespace-pre-line\">The function returns, the stack unwinds,\nLeaving trace logs in our minds.\nShutting down...</p>"
-            }
-        ];
-
-        let cachedPosts = null;
-
-        // 1. Fetch Posts (with fallback)
-        async function loadPosts() {
-            if (cachedPosts) return cachedPosts;
-
-            try {
-                // Try fetching external JSON file
-                const response = await fetch(`posts.json?t=${new Date().getTime()}`);
-                if (!response.ok) throw new Error("File not found");
-                cachedPosts = await response.json();
-                console.log("Loaded from posts.json");
-            } catch (e) {
-                console.warn("Could not load posts.json. Using internal fallback data.");
-                cachedPosts = FALLBACK_POSTS;
-            }
-            return cachedPosts;
-        }
-
-        // 2. Render Index List
-        async function renderList() {
-            const posts = await loadPosts();
-            const app = document.getElementById('app');
-            
-            // Sort: Newest first
-            posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            let html = `<div class="space-y-12 animate-fade-in">`;
-            posts.forEach(post => {
-                html += `
-                    <article class="group">
-                        <div class="flex items-baseline space-x-4 mb-2 opacity-50 text-xs font-mono">
-                            <span>> ${post.date}</span>
-                            <span>ID: ${post.id}</span>
-                        </div>
-                        <h2 class="text-2xl font-bold cursor-pointer hover:underline decoration-2 underline-offset-4 mb-2 text-gray-900" 
-                            onclick="renderPost('${post.id}')">
-                            ${post.title}
-                        </h2>
-                        <!-- Excerpt Section -->
-                        <p class="text-gray-800 text-lg leading-relaxed max-w-2xl mt-2 font-normal">
-                           ${post.excerpt || ""}
-                        </p>
-                    </article>
-                `;
-            });
-            html += `</div>`;
-            app.innerHTML = html;
-            
-            // Update URL safely
-            try {
-                history.pushState(null, '', window.location.pathname + window.location.search);
-            } catch (e) {
-                console.warn("History API not supported in this environment (likely blob/preview). Ignoring URL update.");
-            }
-            window.scrollTo(0, 0);
-        }
-
-        // 3. Render Single Post
-        async function renderPost(id) {
-            const posts = await loadPosts();
-            // Important: Comparing as strings to avoid type errors
-            const post = posts.find(p => String(p.id) === String(id));
-            const app = document.getElementById('app');
-
-            if (post) {
-                // Use Marked if available, otherwise just inject HTML
-                const contentHtml = (typeof marked !== 'undefined') 
-                    ? marked.parse(post.content) 
-                    : post.content;
-
-                app.innerHTML = `
-                    <div class="animate-fade-in">
-                        <button onclick="renderList()" class="mb-8 text-xs font-mono hover:bg-gray-200 px-2 py-1 rounded transition-colors">
-                            << BACK_TO_INDEX
-                        </button>
-                        <article>
-                            <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">${post.title}</h1>
-                            <div class="flex justify-between items-center text-xs opacity-50 font-mono mb-12 border-b border-gray-300 pb-4">
-                                <time>${post.date}</time>
-                                <span>ID: ${post.id}</span>
-                            </div>
-                            
-                            <!-- The 'prose' class here applies our CSS spacing fixes -->
-                            <div class="prose prose-stone prose-lg text-gray-800 leading-relaxed font-normal">
-                                ${contentHtml}
-                            </div>
-                        </article>
-                    </div>
-                `;
-                
-                // Update URL safely
-                try {
-                    history.pushState(null, '', `#${id}`);
-                } catch (e) {
-                    console.warn("History API not supported in this environment (likely blob/preview). Ignoring URL update.");
-                }
-                window.scrollTo(0, 0);
-            } else {
-                app.innerHTML = `<p class="text-red-600 font-mono">> ERROR 404: POST_ID_${id}_NOT_FOUND</p>`;
-            }
-        }
-
-        // 4. Handle Browser Navigation (Back/Forward)
-        window.onpopstate = () => {
-            handleRoute();
-        };
-
-        function handleRoute() {
-            const hash = window.location.hash.replace('#', '');
-            if (hash) {
-                renderPost(hash);
-            } else {
-                renderList();
-            }
-        }
-
-        // 5. Initialize
-        // Add simple fade animation
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-            .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        `;
-        document.head.appendChild(style);
-
-        handleRoute();
-
-    </script>
-</body>
-</html>
