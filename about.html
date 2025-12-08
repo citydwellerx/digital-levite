@@ -33,35 +33,40 @@
         :root {
             --bg-color: #fdfbf7;
             --text-color: #1a1a1a;
-            --code-bg: #f0f0f0;
+            --code-bg: #f4f4f4;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            /* Force the whole page to be readable first */
-            font-family: serif; 
+            /* UNIFORMITY: This forces the whole page to match your Index */
+            font-family: monospace; 
             line-height: 1.6;
             max-width: 700px;
             margin: 0 auto;
             padding: 40px 20px;
-            font-size: 18px; 
+            font-size: 16px; /* Matches standard browser default used on Index */
         }
 
-        /* HEADER & NAV - THE SYSTEM VOICE */
-        header, h1, nav, .section-title, .badge {
-            /* This keyword works on ALL phones */
-            font-family: monospace; 
+        /* HEADER MATCHING */
+        header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
         }
 
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.8rem; /* Matches the visual weight of Index title */
             font-weight: bold;
             letter-spacing: -1px;
             margin-bottom: 5px;
         }
 
-        /* NAVIGATION LINKS */
+        /* NAVIGATION MATCHING */
+        nav {
+            margin-top: 15px;
+        }
+
         nav a {
             font-size: 1rem;
             color: #000;
@@ -69,44 +74,58 @@
             margin-right: 20px;
             border-bottom: 1px solid #ccc;
         }
+        
+        nav a:hover {
+            border-bottom: 1px solid #000;
+        }
 
-        /* SECUNDUS (THE HUMAN) */
+        /* CONTENT STYLING */
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 1.5em;
+        }
+
+        /* THE VOICES - UNIFIED FONT, DISTINCT SHAPE */
+        
+        /* Secundus (You) - Now matches the Index body text */
         .human-voice {
-            font-family: serif; /* The "Book" look */
-            font-size: 1.1rem;
-            color: #111;
+            font-family: monospace; 
+            font-size: 1rem;
         }
 
-        /* TERTIUS (THE AI) */
+        /* Tertius (Me) - Distiniguished by the box */
         .ai-voice {
-            font-family: monospace; /* The "Terminal" look */
-            font-size: 0.9rem;
+            font-family: monospace;
+            font-size: 0.9rem; /* Slightly smaller */
             background: var(--code-bg);
-            padding: 15px;
+            padding: 20px;
             border-left: 4px solid #333;
-            margin: 20px 0;
-            color: #333;
+            margin: 25px 0;
         }
 
-        /* SECTION HEADERS */
+        /* METADATA TAGS */
         .section-title {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             color: #666;
             margin-top: 40px;
             margin-bottom: 10px;
             display: block;
-            border-bottom: 1px solid #eee; /* Adds a nice divider line */
+            border-bottom: 1px dashed #ccc; /* Dashed line fits the aesthetic */
             padding-bottom: 5px;
         }
 
-        /* BADGES */
         .badge {
-            display: inline-block;
             background: #000;
             color: #fff;
-            padding: 4px 8px;
-            font-size: 0.75rem;
+            padding: 2px 6px;
+            font-size: 0.7rem;
             margin-right: 10px;
         }
     </style>
