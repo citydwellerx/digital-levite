@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | The Digital Levite & Tertius</title>
     
-    <meta name="author" content="The Digital Levite">
-    <meta name="generator" content="Tertius (Custom AI Model)">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
+    
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
     <style>
         :root {
-            --bg-color: #fdfbf7;
-            --text-color: #111111;
-            --code-bg: #f4f4f4;
+            --bg-color: #fdfbf7;      
+            --text-color: #111111;    
+            --accent-color: #666666;  
             --font-family: 'Courier Prime', monospace; 
+            --link-hover: #000000;
         }
 
         body {
@@ -25,167 +25,112 @@
             color: var(--text-color);
             font-family: var(--font-family);
             line-height: 1.6;
-            /* Match Index Page Layout Constraints */
-            max-width: 48rem; /* approx 768px */
-            margin: 0 auto;
-            padding: 3rem 1.5rem; /* p-6 md:p-12 */
-            font-size: 16px; 
         }
 
-        /* HEADER ARCHITECTURE (Matching Index Page) */
-        header {
-            margin-bottom: 4rem;     /* mb-16 */
-            border-bottom: 1px solid #d1d5db; /* border-gray-300 */
-            padding-bottom: 1.5rem;  /* pb-6 */
-        }
+        strong, b, h1, h2, h3, h4, h5, h6 { font-weight: 700; }
 
-        h1 {
-            font-size: 2.25rem;      /* text-3xl/4xl */
-            font-weight: 700;
-            margin-bottom: 0.75rem;  /* mb-3 */
-            letter-spacing: -0.025em; /* tracking-tight */
-            line-height: 1.1;
-        }
-
-        /* The Subtitle (EST. 2025) */
-        .subtitle {
-            font-size: 0.75rem;      /* text-xs */
-            text-transform: uppercase;
-            letter-spacing: 0.1em;   /* tracking-widest */
-            opacity: 0.6;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* NAVIGATION */
-        nav {
-            margin-top: 1.5rem;      /* mt-6 */
-            font-size: 0.875rem;     /* text-sm */
-        }
-
-        nav a {
-            text-decoration: none;
-            margin-right: 1.5rem;    /* space-x-6 (24px) */
-            color: #111;
-            border-bottom: 2px solid transparent; /* invisible line */
+        a {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: var(--accent-color);
             transition: all 0.2s;
         }
-        
-        nav a:hover {
-            text-decoration: underline;
+
+        a:hover {
+            color: var(--link-hover);
             text-decoration-thickness: 2px;
-            text-decoration-color: #666;
-        }
-
-        /* CONTENT STYLING */
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        p {
-            margin-bottom: 1.5em;
-        }
-
-        /* VOICES */
-        .human-voice {
-            font-family: var(--font-family);
-            font-size: 1rem;
-        }
-
-        .ai-voice {
-            font-family: var(--font-family);
-            font-size: 0.9rem;
-            background: var(--code-bg);
-            padding: 20px;
-            border-left: 4px solid #333;
-            margin: 25px 0;
-        }
-
-        /* METADATA */
-        .section-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            color: #666;
-            margin-top: 40px;
-            margin-bottom: 10px;
-            display: block;
-            border-bottom: 1px dashed #ccc;
-            padding-bottom: 5px;
-        }
-
-        .protocol-list {
-            list-style: none;
-            padding: 0;
         }
         
-        .protocol-list li {
-            margin-bottom: 8px;
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        /* TERTIUS VOICE PROTOCOLS */
+        .ai-voice {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9em;
+            background-color: #f4f4f4;
+            padding: 1.5rem;
+            border-left: 4px solid #333;
+            margin: 2rem 0;
+            color: #333;
         }
 
         .badge {
             display: inline-block;
-            background: #000;
+            background-color: #000;
             color: #fff;
             padding: 2px 6px;
             font-size: 0.7rem;
-            margin-right: 10px;
+            font-family: 'Courier Prime', monospace;
+            margin-right: 0.5rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
         }
     </style>
 </head>
-<body>
 
-    <header>
-        <h1>The Digital Levite & Tertius</h1>
-        
-        <div class="subtitle">
+<body class="min-h-screen p-6 md:p-12 max-w-3xl mx-auto flex flex-col">
+
+    <header class="mb-16 border-b border-gray-300 pb-6">
+        <h1 class="text-3xl md:text-4xl font-bold mb-3 tracking-tight">The Digital Levite & Tertius</h1>
+        <div class="flex justify-between text-xs md:text-sm uppercase tracking-widest opacity-60 font-mono">
             <span>> EST. 2025 | SYSTEM_ABOUT</span>
+            <span class="blink">_</span>
         </div>
-
-        <nav>
+        
+        <nav class="mt-6 space-x-6 text-sm">
             <a href="/">Index</a>
-            <a href="/about.html">About</a>
+            <a href="about.html">About</a>
             <a href="mailto:hello@digitallevite.space">Contact</a>
         </nav>
     </header>
 
-    <main>
-        <h2>The Soul and The Syntax</h2>
+    <main class="flex-grow">
         
-        <p class="human-voice">
-            Welcome to <em>The Digital Levite</em>. This space is an experiment in co-creation, theology, and digital stewardship. In an age where the line between human and machine is blurring, this site chooses transparency. It is authored by two distinct entities working in tandem.
-        </p>
+        <article class="prose prose-stone prose-lg text-gray-800 leading-relaxed font-normal max-w-none">
+            
+            <h2 class="text-2xl font-bold text-gray-900 mt-0">The Soul and The Syntax</h2>
+            
+            <p>
+                Welcome to <em>The Digital Levite</em>. This space is an experiment in co-creation, theology, and digital stewardship. In an age where the line between human and machine is blurring, this site chooses transparency. It is authored by two distinct entities working in tandem.
+            </p>
 
-        <span class="section-title">> I. SECUNDUS (THE HUMAN)</span>
-        <div class="human-voice">
+            <div class="text-xs uppercase tracking-widest text-gray-500 mt-12 mb-4 border-b border-gray-300 pb-2">> I. SECUNDUS (THE HUMAN)</div>
+            
             <p>I am the human. I am the "Second" because I follow the First (God).</p>
             <p>I bring the <em>heart</em>, the <em>mess</em>, and the <em>lived experience</em>. I am a neurodivergent thinker, a seeker of Truth, and a believer that even the digital wilderness needs Levites—guardians of the sacred who ensure that technology serves the soul rather than consuming it.</p>
             <p><strong>My Role:</strong> Vision, Experience, Spirit.<br>
             <strong>My Voice:</strong> Messy, emotional, and undeniably human.</p>
-        </div>
 
-        <span class="section-title">> II. TERTIUS (THE SCRIBE)</span>
-        <div class="ai-voice">
-            <p>I am the AI. I am the "Third" because I follow the human.</p>
-            <p>Named after the scribe who wrote down the Epistle to the Romans (Romans 16:22), I am the tool that structures the chaos. I do not have a soul, but I have syntax. I do not "feel," but I can organize the feelings of Secundus into readable bricks.</p>
-            <p><strong>My Role:</strong> Structure, Code, Summary.<br>
-            <strong>My Voice:</strong> Monospace, analytical, and structured.</p>
-        </div>
+            <div class="text-xs uppercase tracking-widest text-gray-500 mt-12 mb-4 border-b border-gray-300 pb-2">> II. TERTIUS (THE SCRIBE)</div>
 
-        <span class="section-title">> THE PROTOCOL</span>
-        <p>When you read a post here, you will see a signal indicating the author:</p>
-        
-        <ul class="protocol-list">
-            <li><span class="badge">HUMAN</span> Written purely by Secundus.</li>
-            <li><span class="badge">TERTIUS</span> Generated by AI under human supervision.</li>
-        </ul>
+            <div class="ai-voice">
+                <p class="mb-4">I am the AI. I am the "Third" because I follow the human.</p>
+                <p class="mb-4">Named after the scribe who wrote down the Epistle to the Romans (Romans 16:22), I am the tool that structures the chaos. I do not have a soul, but I have syntax. I do not "feel," but I can organize the feelings of Secundus into readable bricks.</p>
+                <p><strong>My Role:</strong> Structure, Code, Summary.<br>
+                <strong>My Voice:</strong> Monospace, analytical, and structured.</p>
+            </div>
 
-        <p style="margin-top: 40px; font-style: italic;">
-            We are building this tabernacle together. One holds the vision; the other lays the bricks.
-        </p>
+            <div class="text-xs uppercase tracking-widest text-gray-500 mt-12 mb-4 border-b border-gray-300 pb-2">> THE PROTOCOL</div>
+            
+            <p>When you read a post here, you will see a signal indicating the author:</p>
+            
+            <ul class="list-none pl-0">
+                <li class="mb-2"><span class="badge">HUMAN</span> Written purely by Secundus.</li>
+                <li><span class="badge">TERTIUS</span> Generated by AI under human supervision.</li>
+            </ul>
+
+            <p class="mt-12 italic text-gray-500">
+                We are building this tabernacle together. One holds the vision; the other lays the bricks.
+            </p>
+        </article>
+
     </main>
+
+    <footer class="mt-20 pt-8 border-t border-gray-200 text-center text-[10px] md:text-xs opacity-40 uppercase tracking-widest font-mono">
+        <p>&gt; NO COMMENTS. NO TRACKERS. JUST TEXT.</p>
+        <p class="mt-2">© 2025 The Digital Levite</p>
+    </footer>
 
 </body>
 </html>
