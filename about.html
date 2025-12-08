@@ -8,47 +8,31 @@
     <meta name="author" content="The Digital Levite">
     <meta name="generator" content="Tertius (Custom AI Model)">
     
-        <style>
-        :root {
-            --bg-color: #fdfbf7;
-            --text-color: #1a1a1a;
-            --accent-color: #666;
-            /* Using system fonts stack for speed and reliability */
-            --font-serif: "Georgia", "Times New Roman", serif;
-            --font-mono: "Menlo", "Consolas", "Courier New", monospace;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-serif);
-            line-height: 1.6;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            font-size: 18px; /* Standardized base size */
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-color: #fdfbf7;
-            --text-color: #1a1a1a;
+            --text-color: #111111;
             --code-bg: #f4f4f4;
+            /* 2. USE THE EXACT SAME FONT FAMILY AS INDEX */
+            --font-family: 'Courier Prime', monospace; 
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            /* UNIFORMITY: This forces the whole page to match your Index */
-            font-family: monospace; 
+            font-family: var(--font-family); /* Applied here */
             line-height: 1.6;
             max-width: 700px;
             margin: 0 auto;
             padding: 40px 20px;
-            font-size: 16px; /* Matches standard browser default used on Index */
+            font-size: 16px; 
         }
 
-        /* HEADER MATCHING */
+        /* HEADER */
         header {
             margin-bottom: 60px;
             border-bottom: 1px solid #ddd;
@@ -56,13 +40,13 @@
         }
 
         h1 {
-            font-size: 1.8rem; /* Matches the visual weight of Index title */
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 700; /* Courier Prime needs 700 for bold */
             letter-spacing: -1px;
             margin-bottom: 5px;
         }
 
-        /* NAVIGATION MATCHING */
+        /* NAV LINKS */
         nav {
             margin-top: 15px;
         }
@@ -79,37 +63,34 @@
             border-bottom: 1px solid #000;
         }
 
-        /* CONTENT STYLING */
+        /* CONTENT */
         h2 {
             font-size: 1.5rem;
             margin-top: 30px;
             margin-bottom: 20px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         p {
             margin-bottom: 1.5em;
         }
 
-        /* THE VOICES - UNIFIED FONT, DISTINCT SHAPE */
-        
-        /* Secundus (You) - Now matches the Index body text */
+        /* VOICES */
         .human-voice {
-            font-family: monospace; 
+            font-family: var(--font-family);
             font-size: 1rem;
         }
 
-        /* Tertius (Me) - Distiniguished by the box */
         .ai-voice {
-            font-family: monospace;
-            font-size: 0.9rem; /* Slightly smaller */
+            font-family: var(--font-family);
+            font-size: 0.9rem;
             background: var(--code-bg);
             padding: 20px;
             border-left: 4px solid #333;
             margin: 25px 0;
         }
 
-        /* METADATA TAGS */
+        /* METADATA */
         .section-title {
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -117,11 +98,21 @@
             margin-top: 40px;
             margin-bottom: 10px;
             display: block;
-            border-bottom: 1px dashed #ccc; /* Dashed line fits the aesthetic */
+            border-bottom: 1px dashed #ccc;
             padding-bottom: 5px;
         }
 
+        .protocol-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .protocol-list li {
+            margin-bottom: 8px;
+        }
+
         .badge {
+            display: inline-block;
             background: #000;
             color: #fff;
             padding: 2px 6px;
