@@ -4,7 +4,7 @@
     "title": "Hello_World.txt",
     "date": "2025-12-03",
     "excerpt": "Initializing the system. Why I chose a static text aesthetic for 2025.",
-    "content": "<p>Welcome to <strong>The Digital Levite</strong>.</p><p>In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p><p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p><p>Status: <span class=\"font-bold border-b border-ink\">ONLINE</span>.</p>",
+    "content": "<p>Welcome to <strong>The Digital Levite</strong>.</p><div class=\"ai-voice\">In an age of bloat, trackers, and infinite scrolling feeds, I wanted to carve out a quiet corner of the internet. A place that feels like the medium I respect most—ink on paper, clear thought, and no distractions.</p><p>This site is intentionally stripped down. No comments section to moderate. No analytics scripts watching your mouse movements. Just text, code, and a bit of vibe.</p><p>Status: <span class=\"font-bold border-b border-ink\">ONLINE</span>.</div>",
     "tags": ["meta", "intro", "minimalism"]
   },
   {
