@@ -74,28 +74,75 @@
         .section-title {
             font-family: var(--font-mono);
             font-size: 0.8rem;
-            text-transform: uppercase;
-            color: var(--accent-color);
-            margin-top: 50px;
-            margin-bottom: 15px;
-            display: block;
-            letter-spacing: 1px;
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --text-color: #1a1a1a;
+            --code-bg: #f0f0f0;
         }
 
-        /* THE VOICES */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            /* Force the whole page to be readable first */
+            font-family: serif; 
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            font-size: 18px; 
+        }
+
+        /* HEADER & NAV - THE SYSTEM VOICE */
+        header, h1, nav, .section-title, .badge {
+            /* This keyword works on ALL phones */
+            font-family: monospace; 
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+            margin-bottom: 5px;
+        }
+
+        /* NAVIGATION LINKS */
+        nav a {
+            font-size: 1rem;
+            color: #000;
+            text-decoration: none;
+            margin-right: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* SECUNDUS (THE HUMAN) */
         .human-voice {
-            /* Inherits default serif font */
-            color: #222;
+            font-family: serif; /* The "Book" look */
+            font-size: 1.1rem;
+            color: #111;
         }
 
+        /* TERTIUS (THE AI) */
         .ai-voice {
-            font-family: var(--font-mono);
-            font-size: 0.95rem; /* Slightly smaller to look like code */
-            background: #f4f4f4;
-            padding: 20px;
+            font-family: monospace; /* The "Terminal" look */
+            font-size: 0.9rem;
+            background: var(--code-bg);
+            padding: 15px;
             border-left: 4px solid #333;
-            margin: 25px 0;
+            margin: 20px 0;
             color: #333;
+        }
+
+        /* SECTION HEADERS */
+        .section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            display: block;
+            border-bottom: 1px solid #eee; /* Adds a nice divider line */
+            padding-bottom: 5px;
         }
 
         /* BADGES */
@@ -103,12 +150,9 @@
             display: inline-block;
             background: #000;
             color: #fff;
-            padding: 3px 8px;
-            font-family: var(--font-mono);
+            padding: 4px 8px;
             font-size: 0.75rem;
             margin-right: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
     </style>
 </head>
